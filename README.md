@@ -1,24 +1,30 @@
-﻿# Reports
-Репозиторий с разработкой отчета "Проект резолюции".
+﻿# rx-template-govreports
+Репозиторий с шаблоном разработки "Отчеты для госорганов".
 
 ## Описание
-Решение позволяет реализовать на заказном слое запуск отчета "Проект резолюции" (например, запуск из карточки задачи на исполнение поручения), используя уже реализованную функцию OpenDraftResolution().
-Пример запуска отчета по кнопке в задаче на исполнение поручения (вычисления на действии):
-  _obj.Save();
+Решение будет содержать отчеты специфичные для госорганов так и отчеты которые могут потребоваться для других заказчиков. 
+### Отчет "Проект резолюции"
+Позволяет реализовать формирование печатной формы резолюции по кнопке из карточки задачи на исполнение поручения.
 
-  var actionItems = new List<Sungero.RecordManagement.IActionItemExecutionTask>();
-  actionItems.Add(_obj);
-  GD.ReportsModule.PublicFunctions.Module.OpenDraftResolution(actionItems, _obj.ActiveText, _obj.DocumentsGroup.OfficialDocuments.FirstOrDefault(), _obj.AssignedBy, new object[0]);
-
-Состав объектов разработки:
+Состав объектов разработки:  
 * Отчет "Проект резолюции"
+* Функция модуля OpenDraftResolution
 
 ## Варианты расширения функциональности на проектах
-1.	Доработка макета отчета.
-2.	Добавление новых данных в отчет в соответствии с особенностями реализации процесса исполнения поручений.
+
+### Отчет "Проект резолюции"
+1. Перекрыть задачу по исполнению поручений для добавления кнопоки для формирования печатной формы резолюции.  
+   Пример вычислений на кнопке:
+```
+  _obj.Save();
+  var actionItems = new List<Sungero.RecordManagement.IActionItemExecutionTask>();
+  actionItems.Add(_obj);
+  GD.ReportsModule.PublicFunctions.Module.OpenDraftResolution(actionItems, _obj.ActiveText, _obj.DocumentsGroup.OfficialDocuments.FirstOrDefault(), _obj.AssignedBy, new   object[0]);
+```
+2. Доработка макета отчета.
+3. Добавление новых данных в отчет в соответствии с особенностями реализации процесса исполнения поручений.
 
 ## Порядок установки
-Для работы требуется установленный Directum RX версии 3.6. 
 
 ### Установка для ознакомления
 1. Склонировать репозиторий Reports в папку.
@@ -28,7 +34,7 @@
   <repository folderName="Base" solutionType="Base" url="" />
   <repository folderName="RX" solutionType="Base" url="<адрес локального репозитория>" />
   <repository folderName="<Папка из п.1>" solutionType="Work" 
-     url="https://customdevtfs.directum.ru/tfs/GovernmentDepartmentsRX/GovernmentStSol/_git/Reports" />
+     url="https://github.com/DirectumCompany/rx-template-govreports" />
 </block>
 ```
 
@@ -58,7 +64,7 @@
   <repository folderName="<Папка из п.1>" solutionType="Base" 
      url="<Адрес репозитория gitHub>" />
   <repository folderName="<Папка для рабочего слоя>" solutionType="Work" 
-     url="https://customdevtfs.directum.ru/tfs/GovernmentDepartmentsRX/GovernmentStSol/_git/Reports" />
+     url="https://github.com/DirectumCompany/rx-template-govreports" />
 </block>
 ```
 
