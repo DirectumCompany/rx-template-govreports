@@ -1,0 +1,138 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "0404cc5f-4785-4c84-b9f6-98941d60a84b",
+  "Name": "DraftResolutionReport",
+  "AssociatedGuid": "376044cb-ef49-498f-862a-c3d856784c07",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word",
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DisplayName",
+    "Description",
+    "HandledEvents",
+    "Parameters"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "6def17a7-edaf-4a5d-bc00-bd031c2fafea",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "65828e81-3f11-4d7f-abf6-b8581f8c3fde",
+      "Name": "Resolution",
+      "EntityType": "c290b098-12c7-487d-bb38-73e2c98f9789",
+      "InternalDataTypeName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces",
+      "IsCollection": true
+    },
+    {
+      "NameGuid": "a57a07be-752d-4946-b4c2-4dd2751d0f4f",
+      "Name": "AuthorJobTitle",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "6caf4208-27f3-4a78-959e-5927c336e99a",
+      "Name": "AuthorShortName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "c73e2579-1533-41fa-9a7a-7a40cfd1d350",
+      "Name": "DocumentShortName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "10917f85-3838-4b00-a317-6e866f8f825d",
+      "Name": "Author",
+      "EntityType": "b7905516-2be5-4931-961c-cb38d5677565",
+      "InternalDataTypeName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "9362e1d7-69a6-4aaf-9224-caffd819e036",
+      "Name": "Document",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "696c5268-d8d1-4c2a-82e5-d67bb1290606",
+      "Name": "TextResolution",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "d75f099e-ea15-4db4-baeb-33779d61a0bf",
+      "Name": "BusinessUnit",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "3d0ab7de-e53d-48c0-b7cb-8c118aa0ecb1",
+      "Name": "PreparedUser",
+      "EntityType": "243c2d26-f5f7-495f-9faf-951d91215c77",
+      "InternalDataTypeName": "Sungero.CoreEntities.IUser, Sungero.Domain.Shared"
+    },
+    {
+      "NameGuid": "88fbedd9-2d22-4fa8-a8bf-83d7f2386b51",
+      "Name": "PreparedBy",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "DraftResolutionReportParameters",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "PerformersLabel",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Deadline",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "ResolutionLabel",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "SupervisorLabel",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "GD.ReportsModule.Structures.DraftResolutionReport"
+    }
+  ],
+  "ResourcesKeys": [
+    "AssigneePrefix",
+    "Deadline",
+    "DocumentShortNamePrefix",
+    "IDPrefix",
+    "OnControlPrefix",
+    "ResolutionPrefix",
+    "PreparedByPrefix",
+    "PreparedByPhonePrefix",
+    "DocumentInfoLeadPart",
+    "DocumentInfoDateFrom",
+    "UnifyingExecutorPrefix"
+  ],
+  "Versions": []
+}

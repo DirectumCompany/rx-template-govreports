@@ -1,0 +1,152 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "376044cb-ef49-498f-862a-c3d856784c07",
+  "Name": "ReportsModule",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "GD.ReportsModule.Client",
+  "ClientBaseAssemblyName": "GD.ReportsModule.ClientBase",
+  "ClientBaseNamespace": "GD.ReportsModule.ClientBase",
+  "ClientNamespace": "GD.ReportsModule.Client",
+  "Code": "Report",
+  "CompanyCode": "GD",
+  "Cover": {
+    "NameGuid": "7f6d72d6-3754-49e3-8894-7e8ad28c7191",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "5b70d322-e9b7-4dd7-9b01-1bfd55072531",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "45c929fc-fc6a-4c72-a967-9233866875fc",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "Dependencies": [
+    {
+      "Id": "d4c322f6-c87a-4ab5-940c-c4f702ee0d7f",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "GD.ReportsModule",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetDraftResolutionReport",
+      "ReturnType": "GD.ReportsModule.IDraftResolutionReport"
+    },
+    {
+      "Name": "GetDraftResolutionReportData",
+      "Parameters": [
+        {
+          "Name": "reportSessionId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "actionItems",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.RecordManagement.IActionItemExecutionTask>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Structures.DraftResolutionReport.DraftResolutionReportParameters>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetDraftResolutionReportDocumentInfo",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetDraftResolutionReportPreparedUserInfo",
+      "Parameters": [
+        {
+          "Name": "user",
+          "ParameterType": "global::Sungero.CoreEntities.IUser",
+          "ParameterTypeFullName": "Sungero.CoreEntities.IUser, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "OpenDraftResolution",
+      "Parameters": [
+        {
+          "Name": "tasks",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.RecordManagement.IActionItemExecutionTask>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "textResolution",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "author",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "parameters",
+          "ParameterType": "System.Object[]"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "GD.ReportsModule",
+  "ResourcesKeys": [
+    "Deadline"
+  ],
+  "ServerAssemblyName": "GD.ReportsModule.Server",
+  "ServerNamespace": "GD.ReportsModule.Server",
+  "SharedAssemblyName": "GD.ReportsModule.Shared",
+  "SharedNamespace": "GD.ReportsModule.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

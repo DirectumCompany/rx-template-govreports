@@ -1,0 +1,57 @@
+{
+  "$type": "Sungero.Metadata.SolutionMetadata, Sungero.Metadata",
+  "NameGuid": "d4c322f6-c87a-4ab5-940c-c4f702ee0d7f",
+  "Name": "Reports",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "GD.Reports.Client",
+  "ClientBaseAssemblyName": "GD.Reports.ClientBase",
+  "ClientBaseNamespace": "GD.Reports.ClientBase",
+  "ClientNamespace": "GD.Reports.Client",
+  "Code": "Reports",
+  "CompanyCode": "GD",
+  "Cover": {
+    "NameGuid": "a14fe98a-7b7c-48dd-9e02-510cd7bb3c43",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "a8fa7fdf-f385-4a84-bfd3-9c370779c4ea",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "3a1758cf-db1c-4d01-965f-68e48b0907bd",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "DesktopViews": [],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "GD.Reports",
+  "OrderedSpecialFolders": [],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "GD.Reports",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "GD.Reports.Server",
+  "ServerNamespace": "GD.Reports.Server",
+  "SharedAssemblyName": "GD.Reports.Shared",
+  "SharedNamespace": "GD.Reports.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "SolutionMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}
