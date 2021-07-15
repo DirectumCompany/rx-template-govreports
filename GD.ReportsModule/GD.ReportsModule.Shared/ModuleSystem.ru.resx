@@ -120,4 +120,16 @@
   <data name="DisplayName" xml:space="preserve">
     <value>Отчеты</value>
   </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="CoverGroup_ReportsGroup" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="CoverAction_AllReports" xml:space="preserve">
+    <value>Все отчеты</value>
+  </data>
+  <data name="CoverDescription_AllReports" xml:space="preserve">
+    <value>Список всех отчетов модуля.</value>
+  </data>
 </root>

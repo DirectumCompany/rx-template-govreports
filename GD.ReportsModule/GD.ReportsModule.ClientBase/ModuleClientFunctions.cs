@@ -10,6 +10,15 @@ namespace GD.ReportsModule.Client
   {
 
     /// <summary>
+    /// 
+    /// </summary>
+    public virtual void ShowAllReports()
+    {
+      var reports = ReportsModule.Reports.GetAll().ToList();
+      reports.AsEnumerable().Show(Sungero.RecordManagement.Resources.AllReportsTitle);
+    }
+
+    /// <summary>
     /// Сформировать отчет "Проект резолюции".
     /// </summary>
     /// <param name="tasks">Список задач на исполнение поручения.</param>

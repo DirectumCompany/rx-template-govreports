@@ -117,16 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Deadline" xml:space="preserve">
-    <value>Срок</value>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Приложение №2. Итоговая таблица оценки результатов рассмотрения обращений</value>
   </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>Дата начала</value>
-  </data>
-  <data name="EndDate" xml:space="preserve">
-    <value>Дата окончания</value>
-  </data>
-  <data name="ReportParameters" xml:space="preserve">
-    <value>Параметры отчета</value>
+  <data name="Description" xml:space="preserve">
+    <value>Итоговая таблица оценки результатов рассмотрения обращений (с учетом мнения авторов) и принятых по ним мер исполнительными органами государственной власти и органами местного самоуправления.</value>
   </data>
 </root>

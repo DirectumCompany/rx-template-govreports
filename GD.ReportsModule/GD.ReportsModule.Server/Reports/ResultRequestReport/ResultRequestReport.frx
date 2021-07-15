@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = GD.ReportsModule.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="IOGVTable" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${IOGVQuery}">
+        <Column Name="supportedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="actionsTakenCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="notSupportedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="explainedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="activeCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BusinessUnit" DataType="System.String" PropName="Column" BindableControl="RichText"/>
+        <Column Name="citizensAmount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Reviewed" DataType="System.Int32" PropName="Column"/>
+        <Column Name="SupportedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="ActionsTakenProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="NotSupportedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="ExplainedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="SupportedShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="ActionsTakenShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="NotSupportedShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="ExplainedShareComparison" DataType="System.Double" PropName="Column"/>
+        <CommandParameter Name="StartDate" DataType="5" IsDbType="true" Expression="[StartDate]"/>
+        <CommandParameter Name="EndDate" DataType="5" IsDbType="true" Expression="[EndDate]"/>
+        <CommandParameter Name="BusinessUnitId" DataType="11" IsDbType="true" Expression="[BusinessUnitId]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="OMSUTable" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${OMSUQuery}">
+        <Column Name="supportedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="actionsTakenCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="notSupportedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="explainedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="activeCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BusinessUnit" DataType="System.String" PropName="Column"/>
+        <Column Name="citizensAmount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="DName" DataType="System.String" PropName="Column"/>
+        <Column Name="Reviewed" DataType="System.Int32" PropName="Column"/>
+        <Column Name="SupportedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="ActionsTakenProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="NotSupportedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="ExplainedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="SupportedShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="ActionsTakenShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="NotSupportedShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="ExplainedShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUSupportedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUActionsTakenCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUNotSupportedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUExplainedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUReviewed" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUSupportedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUActionsTakenProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUNotSupportedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUExplainedProportion" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUActiveCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUCitizensAmount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUSupportedShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUActionsTakenShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUNotSupportedShareComparison" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUExplainedShareComparison" DataType="System.Double" PropName="Column"/>
+        <CommandParameter Name="StartDate" DataType="5" IsDbType="true" Expression="[StartDate]"/>
+        <CommandParameter Name="EndDate" DataType="5" IsDbType="true" Expression="[EndDate]"/>
+        <CommandParameter Name="BusinessUnitId" DataType="11" IsDbType="true" Expression="[BusinessUnitId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="98c81df1-cb96-444f-b91d-2992e4b2b657" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="StartDate" Id="20923eec-c70c-487a-9204-8849f6728492" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" Id="966e7c6b-c3cf-4049-a074-59f321b4b86e" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitTypeGuid" Id="d3feefbe-144b-4101-887b-0cd71826e0bc" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RequestGuid" Id="7bc54e2c-d4e3-4e28-bbd6-1ac8f1e5e247" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AllBusinessUnits" Id="09eb91ff-cd82-4773-9496-05dd54eda465" IsRequired="true" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" Id="e579b458-69b6-4bca-b5e8-69815986ef15" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <Total Name="TotalReviewed" Expression="[IOGVTOTable.Reviewed]" Evaluator="Data1"/>
+    <Total Name="TotalCitizensAmount" Expression="[IOGVTOTable.citizensAmount]" Evaluator="Data1"/>
+    <Total Name="TotalSupportedCount" Expression="[IOGVTOTable.supportedCount]" Evaluator="Data1"/>
+    <Total Name="TotalActionsTakenCount" Expression="[IOGVTOTable.actionsTakenCount]" Evaluator="Data1"/>
+    <Total Name="TotalNotSupportedCount" Expression="[IOGVTOTable.notSupportedCount]" Evaluator="Data1"/>
+    <Total Name="TotalExplainedCount" Expression="[IOGVTOTable.explainedCount]" Evaluator="Data1"/>
+    <Total Name="TotalActiveCount" Expression="[IOGVTOTable.activeCount]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="750" PaperHeight="210" RawPaperSize="0" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="2759.4" Height="56.7">
+      <TextObject Name="Text1" Width="2725.38" Height="56.7" Text="Итоговая таблица оценки результатов&#13;&#10;рассмотрения обращений (с учетом мнения авторов) и принятых по ним мер исполнительными органами государственной власти Тюменской области с [StartDate] по [EndDate]" HorzAlign="Center" Font="Arial, 14pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text19" Width="122.85" Height="18.9" Text="Приложение 2" Font="Arial, 10pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="518.3" Width="2759.4" Height="28.35" DataSource="Table">
+      <TextObject Name="Text2" Width="368.55" Height="28.35" Text="[IOGVTable.BusinessUnit]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text3" Left="374.22" Width="52.92" Height="28.35" Text="[IOGVTable.Reviewed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="532.98" Width="56.7" Height="28.35" Text="[IOGVTable.citizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="591.57" Width="66.15" Height="28.35" Text="[IOGVTable.supportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="657.72" Width="66.15" Height="28.35" Text="[IOGVTable.SupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="1118.88" Width="66.15" Height="28.35" Text="[IOGVTOTable.actionsTakenCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="1610.28" Width="66.15" Height="28.35" Text="[IOGVTOTable.notSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="2007.18" Width="66.15" Height="28.35" Text="[IOGVTOTable.explainedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="2668.68" Width="66.15" Height="28.35" Text="[IOGVTOTable.activeCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="1185.03" Width="66.15" Height="28.35" Text="[IOGVTOTable.ActionsTakenProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text12" Left="1676.43" Width="66.15" Height="28.35" Text="[IOGVTOTable.NotSupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text13" Left="2073.33" Width="66.15" Height="28.35" Text="[IOGVTOTable.ExplainedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Left="721.98" Width="66.15" Height="28.35" Text="[IOGVTable.SupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="1251.18" Width="66.15" Height="28.35" Text="[IOGVTOTable.ActionsTakenShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="1742.58" Width="66.15" Height="28.35" Text="[IOGVTOTable.NotSupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text17" Left="2139.48" Width="66.15" Height="28.35" Text="[IOGVTOTable.ExplainedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <DataHeaderBand Name="DataHeader1" Top="60.7" Width="2759.4" Height="453.6">
+        <TableObject Name="TitleTable" Width="2735.17" Height="453.6" Border.Lines="Top">
+          <TableColumn Name="Column1" Width="374.22"/>
+          <TableColumn Name="Column2" Width="52.92"/>
+          <TableColumn Name="Column3" Width="52.92"/>
+          <TableColumn Name="Column4" Width="52.92"/>
+          <TableColumn Name="Column5" Width="57.04"/>
+          <TableColumn Name="Column6"/>
+          <TableColumn Name="Column7"/>
+          <TableColumn Name="Column8"/>
+          <TableColumn Name="Column9"/>
+          <TableColumn Name="Column10"/>
+          <TableColumn Name="Column11"/>
+          <TableColumn Name="Column12"/>
+          <TableColumn Name="Column13"/>
+          <TableColumn Name="Column14"/>
+          <TableColumn Name="Column15"/>
+          <TableColumn Name="Column16"/>
+          <TableColumn Name="Column17"/>
+          <TableColumn Name="Column18"/>
+          <TableColumn Name="Column19" Width="94.5"/>
+          <TableColumn Name="Column20"/>
+          <TableColumn Name="Column21"/>
+          <TableColumn Name="Column22"/>
+          <TableColumn Name="Column23"/>
+          <TableColumn Name="Column24"/>
+          <TableColumn Name="Column25"/>
+          <TableColumn Name="Column26"/>
+          <TableColumn Name="Column27"/>
+          <TableColumn Name="Column28"/>
+          <TableColumn Name="Column29"/>
+          <TableColumn Name="Column30"/>
+          <TableColumn Name="Column31"/>
+          <TableColumn Name="Column32"/>
+          <TableColumn Name="Column33"/>
+          <TableColumn Name="Column34"/>
+          <TableColumn Name="Column35"/>
+          <TableColumn Name="Column36"/>
+          <TableColumn Name="Column37"/>
+          <TableRow Name="Row1" Height="66.15">
+            <TableCell Name="Cell1" Border.Lines="All" Text="Название организации и/или района" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="4"/>
+            <TableCell Name="Cell3" Border.Lines="All" Text="Количество рассмотренных вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+            <TableCell Name="Cell4" Border.Lines="All" Text="Положительная оценка, высказанная авторами обращений" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+            <TableCell Name="Cell5" Border.Lines="All" Text="Количество благодарностей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+            <TableCell Name="Cell2" Border.Lines="All" Text="Количество граждан, заинтересованных в решении вопросов, содержащихся в обращениях" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+            <TableCell Name="Cell41" Border.Lines="All" Text="Сравнение доли количества решений, принятых соответствующим ОИВ вопросов, содержащихся в обращениях, в общем количестве вопросов, содержащихся в обращениях, направленных в данный ОИВ ТО, в компетенцию которого входит решение данных вопросов, или по которым запрошены необходимые для их рассмотрения документы и материалы в данном ОИВ ТО, с соответствующим показателем по всем ОИВ ТО" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="31"/>
+            <TableCell Name="Cell42" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell43" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell44" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell45" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell46" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell47" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell48" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell49" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell50" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell51" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell52" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell53" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell54" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell55" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell56" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell57" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell58" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell59" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell60" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell61" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell62" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell63" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell64" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell65" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell66" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell67" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell68" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell69" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell70" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell71" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell72" Border.Lines="All" Text="На рассмотрении" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+          </TableRow>
+          <TableRow Name="Row2">
+            <TableCell Name="Cell6" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell7" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell8" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell9" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell10" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell73" Border.Lines="All" Text="«поддержано»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="8"/>
+            <TableCell Name="Cell74" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell75" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell76" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell77" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell78" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell79" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell80" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell81" Border.Lines="All" Text="в том числе «меры приняты»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="7"/>
+            <TableCell Name="Cell82" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell83" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell84" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell85" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell86" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell87" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell88" Border.Lines="All" Text="«не поддержано»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="6"/>
+            <TableCell Name="Cell89" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell90" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell91" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell92" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell93" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell94" Border.Lines="All" Text="«разъяснено»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="10"/>
+            <TableCell Name="Cell95" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell96" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell97" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell98" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell99" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell100" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell101" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell102" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell103" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell104" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          </TableRow>
+          <TableRow Name="Row3" Height="56.7">
+            <TableCell Name="Cell11" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell12" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell13" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell14" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell15" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell105" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell106" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell107" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell108" Border.Lines="All" Text="в том числе по оценке автора" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+            <TableCell Name="Cell109" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell110" Border.Lines="All" Text="в том числе с дополнительными мерами контроля" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="3"/>
+            <TableCell Name="Cell111" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell112" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell113" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell114" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell115" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell116" Border.Lines="All" Text="в том числе по оценке автора" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+            <TableCell Name="Cell117" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell118" Border.Lines="All" Text="в том числе с дополнительными мерами контроля" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+            <TableCell Name="Cell119" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell120" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell121" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell122" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell123" Border.Lines="All" Text="в том числе по оценке АГ" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+            <TableCell Name="Cell124" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell125" Border.Lines="All" Text="с применением  дополнительных мер контроля" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell126" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell127" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell128" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+            <TableCell Name="Cell129" Border.Lines="All" Text="в том числе по оценке АГ" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+            <TableCell Name="Cell130" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell131" Border.Lines="All" Text="в том числе с дополнительными мерами контроля" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="5"/>
+            <TableCell Name="Cell132" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell133" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell134" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell135" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell136" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          </TableRow>
+          <TableRow Name="Row4" Height="292.95">
+            <TableCell Name="Cell16" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell17" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell18" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell19" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell20" Border.Lines="All" Font="Arial, 10pt"/>
+            <TableCell Name="Cell137" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell138" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell139" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell140" Border.Lines="All" Text="из Личного кабинета" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell141" Border.Lines="All" Text="несовпадающей  с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell142" Border.Lines="All" Text="до принятия мер" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell143" Border.Lines="All" Text="с учетом мнения автора обращения по принятому решению" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell144" Border.Lines="All" Text="в том числе с положительной оценкой автора" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell145" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell146" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell147" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell148" Border.Lines="All" Text="из Личного кабинета" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell149" Border.Lines="All" Text="несовпадающей с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell150" Border.Lines="All" Text="с учетом мнения автора обращения" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell151" Border.Lines="All" Text="в том числе с положительной оценкой автора" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell152" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell153" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell154" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell155" Border.Lines="All" Text="работником" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell156" Border.Lines="All" Text="несовпадающей  с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell157" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell158" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell159" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell160" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell161" Border.Lines="All" Text="работником" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell162" Border.Lines="All" Text="несовпадающей  с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell163" Border.Lines="All" Text="до выполнения рекомендаций" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell164" Border.Lines="All" Text="до принятия решения" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell165" Border.Lines="All" Text="до принятия мер" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell166" Border.Lines="All" Text="с учетом мнения автора обращения" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell167" Border.Lines="All" Text="в том числе с положительной оценкой автора" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+            <TableCell Name="Cell168" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          </TableRow>
+          <TableRow Name="Row5">
+            <TableCell Name="Cell21" Border.Lines="All" Text="1" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell22" Border.Lines="All" Text="2" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell23" Border.Lines="All" Text="3" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell24" Border.Lines="All" Text="4" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell25" Border.Lines="All" Text="5" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell169" Border.Lines="All" Text="6" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell170" Border.Lines="All" Text="7" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell171" Border.Lines="All" Text="8" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell172" Border.Lines="All" Text="9" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell173" Border.Lines="All" Text="10" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell174" Border.Lines="All" Text="11" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell175" Border.Lines="All" Text="12" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell176" Border.Lines="All" Text="13" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell177" Border.Lines="All" Text="14" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell178" Border.Lines="All" Text="15" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell179" Border.Lines="All" Text="16" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell180" Border.Lines="All" Text="17" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell181" Border.Lines="All" Text="18" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell182" Border.Lines="All" Text="19" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell183" Border.Lines="All" Text="20" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell184" Border.Lines="All" Text="21" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell185" Border.Lines="All" Text="22" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell186" Border.Lines="All" Text="23" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell187" Border.Lines="All" Text="24" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell188" Border.Lines="All" Text="25" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell189" Border.Lines="All" Text="26" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell190" Border.Lines="All" Text="27" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell191" Border.Lines="All" Text="28" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell192" Border.Lines="All" Text="29" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell193" Border.Lines="All" Text="30" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell194" Border.Lines="All" Text="31" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell195" Border.Lines="All" Text="32" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell196" Border.Lines="All" Text="33" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell197" Border.Lines="All" Text="34" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell198" Border.Lines="All" Text="35" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell199" Border.Lines="All" Text="36" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell200" Border.Lines="All" Text="37" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          </TableRow>
+        </TableObject>
+      </DataHeaderBand>
+    </DataBand>
+    <DataBand Name="Data2" Top="550.65" Width="2759.4" Height="28.35">
+      <TableObject Name="TotalTable" Width="2735.17" Height="28.35" Fill.Color="255, 192, 192">
+        <TableColumn Name="Column38" Width="374.22"/>
+        <TableColumn Name="Column39" Width="52.92"/>
+        <TableColumn Name="Column40" Width="52.92"/>
+        <TableColumn Name="Column41" Width="52.92"/>
+        <TableColumn Name="Column42" Width="57.04"/>
+        <TableColumn Name="Column43"/>
+        <TableColumn Name="Column44"/>
+        <TableColumn Name="Column45"/>
+        <TableColumn Name="Column46"/>
+        <TableColumn Name="Column47"/>
+        <TableColumn Name="Column48"/>
+        <TableColumn Name="Column49"/>
+        <TableColumn Name="Column50"/>
+        <TableColumn Name="Column51"/>
+        <TableColumn Name="Column52"/>
+        <TableColumn Name="Column53"/>
+        <TableColumn Name="Column54"/>
+        <TableColumn Name="Column55"/>
+        <TableColumn Name="Column56" Width="94.5"/>
+        <TableColumn Name="Column57"/>
+        <TableColumn Name="Column58"/>
+        <TableColumn Name="Column59"/>
+        <TableColumn Name="Column60"/>
+        <TableColumn Name="Column61"/>
+        <TableColumn Name="Column62"/>
+        <TableColumn Name="Column63"/>
+        <TableColumn Name="Column64"/>
+        <TableColumn Name="Column65"/>
+        <TableColumn Name="Column66"/>
+        <TableColumn Name="Column67"/>
+        <TableColumn Name="Column68"/>
+        <TableColumn Name="Column69"/>
+        <TableColumn Name="Column70"/>
+        <TableColumn Name="Column71"/>
+        <TableColumn Name="Column72"/>
+        <TableColumn Name="Column73"/>
+        <TableColumn Name="Column74"/>
+        <TableRow Name="Row6" Height="28.35">
+          <TableCell Name="Cell201" Fill.Color="255, 192, 192" Text="Всего по ОИВ:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell202" Fill.Color="255, 192, 192" Text="[TotalReviewed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell203" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell204" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell205" Fill.Color="255, 192, 192" Text="[TotalCitizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell206" Fill.Color="255, 192, 192" Text="[TotalSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell207" Fill.Color="255, 192, 192" Text="[ReportsModule.PublicFunctions.Module.GetProportion([TotalSupportedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell208" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell209" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell210" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell211" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell212" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell213" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell214" Fill.Color="255, 192, 192" Text="[TotalActionsTakenCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell215" Fill.Color="255, 192, 192" Text="[SC.CitizenRequestsModule.PublicFunctions.Module.GetProportion([TotalActionsTakenCount], [TotalSupportedCount]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell216" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell217" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell218" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell219" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell220" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell221" Fill.Color="255, 192, 192" Text="[TotalNotSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell222" Fill.Color="255, 192, 192" Text="[SC.CitizenRequestsModule.PublicFunctions.Module.GetProportion([TotalNotSupportedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell223" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell224" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell225" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell226" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell227" Fill.Color="255, 192, 192" Text="[TotalExplainedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell228" Fill.Color="255, 192, 192" Text="[SC.CitizenRequestsModule.PublicFunctions.Module.GetProportion([TotalExplainedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell229" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell230" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell231" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell232" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell233" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell234" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell235" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell236" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell237" Fill.Color="255, 192, 192" Text="[TotalActiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+  </ReportPage>
+  <ReportPage Name="Page2" PaperWidth="750" RawPaperSize="0" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle2" Width="2759.4" Height="510.3">
+      <TextObject Name="Text18" Width="2734.83" Height="56.7" Text="Итоговая таблица оценки результатов&#13;&#10;рассмотрения обращений (с учетом мнения авторов) и принятых по ним мер органами местного самоуправления с [StartDate] по [EndDate]" HorzAlign="Center" Font="Arial, 14pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text20" Width="122.85" Height="18.9" Text="Приложение 2" Font="Arial, 10pt, style=Bold"/>
+      <TableObject Name="Table3" Top="56.7" Width="2735.17" Height="453.6" Border.Lines="Top">
+        <TableColumn Name="Column75" Width="374.22"/>
+        <TableColumn Name="Column76" Width="52.92"/>
+        <TableColumn Name="Column77" Width="52.92"/>
+        <TableColumn Name="Column78" Width="52.92"/>
+        <TableColumn Name="Column79" Width="57.04"/>
+        <TableColumn Name="Column80"/>
+        <TableColumn Name="Column81"/>
+        <TableColumn Name="Column82"/>
+        <TableColumn Name="Column83"/>
+        <TableColumn Name="Column84"/>
+        <TableColumn Name="Column85"/>
+        <TableColumn Name="Column86"/>
+        <TableColumn Name="Column87"/>
+        <TableColumn Name="Column88"/>
+        <TableColumn Name="Column89"/>
+        <TableColumn Name="Column90"/>
+        <TableColumn Name="Column91"/>
+        <TableColumn Name="Column92"/>
+        <TableColumn Name="Column93" Width="94.5"/>
+        <TableColumn Name="Column94"/>
+        <TableColumn Name="Column95"/>
+        <TableColumn Name="Column96"/>
+        <TableColumn Name="Column97"/>
+        <TableColumn Name="Column98"/>
+        <TableColumn Name="Column99"/>
+        <TableColumn Name="Column100"/>
+        <TableColumn Name="Column101"/>
+        <TableColumn Name="Column102"/>
+        <TableColumn Name="Column103"/>
+        <TableColumn Name="Column104"/>
+        <TableColumn Name="Column105"/>
+        <TableColumn Name="Column106"/>
+        <TableColumn Name="Column107"/>
+        <TableColumn Name="Column108"/>
+        <TableColumn Name="Column109"/>
+        <TableColumn Name="Column110"/>
+        <TableColumn Name="Column111"/>
+        <TableRow Name="Row7" Height="66.15">
+          <TableCell Name="Cell238" Border.Lines="All" Text="Название организации и/или района" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="4"/>
+          <TableCell Name="Cell239" Border.Lines="All" Text="Количество рассмотренных вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+          <TableCell Name="Cell240" Border.Lines="All" Text="Положительная оценка, высказанная авторами обращений" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+          <TableCell Name="Cell241" Border.Lines="All" Text="Количество благодарностей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+          <TableCell Name="Cell242" Border.Lines="All" Text="Количество граждан, заинтересованных в решении вопросов, содержащихся в обращениях" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+          <TableCell Name="Cell243" Border.Lines="All" Text="Сравнение доли количества решений, принятых соответствующим ОМСУ вопросов, содержащихся в обращениях, в общем количестве вопросов, содержащихся в обращениях, направленных в данный ОМСУ, в компетенцию которого входит решение данных вопросов, или по которым запрошены необходимые для их рассмотрения документы и материалы в данном ОМСУ , с соответствующим показателем по всем ОМСУ" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="31"/>
+          <TableCell Name="Cell244" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell245" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell246" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell247" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell248" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell249" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell250" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell251" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell252" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell253" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell254" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell255" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell256" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell257" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell258" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell259" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell260" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell261" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell262" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell263" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell264" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell265" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell266" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell267" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell268" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell269" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell270" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell271" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell272" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell273" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell274" Border.Lines="All" Text="На рассмотрении" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="4"/>
+        </TableRow>
+        <TableRow Name="Row8">
+          <TableCell Name="Cell275" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell276" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell277" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell278" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell279" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell280" Border.Lines="All" Text="«поддержано»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="8"/>
+          <TableCell Name="Cell281" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell282" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell283" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell284" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell285" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell286" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell287" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell288" Border.Lines="All" Text="в том числе «меры приняты»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="7"/>
+          <TableCell Name="Cell289" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell290" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell291" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell292" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell293" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell294" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell295" Border.Lines="All" Text="«не поддержано»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="6"/>
+          <TableCell Name="Cell296" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell297" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell298" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell299" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell300" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell301" Border.Lines="All" Text="«разъяснено»" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="10"/>
+          <TableCell Name="Cell302" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell303" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell304" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell305" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell306" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell307" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell308" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell309" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell310" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell311" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row9" Height="56.7">
+          <TableCell Name="Cell312" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell313" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell314" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell315" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell316" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell317" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell318" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell319" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell320" Border.Lines="All" Text="в том числе по оценке автора" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell321" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell322" Border.Lines="All" Text="в том числе с дополнительными мерами контроля" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="3"/>
+          <TableCell Name="Cell323" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell324" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell325" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell326" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell327" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell328" Border.Lines="All" Text="в том числе по оценке автора" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell329" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell330" Border.Lines="All" Text="в том числе с дополнительными мерами контроля" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell331" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell332" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell333" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell334" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell335" Border.Lines="All" Text="в том числе по оценке АГ" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell336" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell337" Border.Lines="All" Text="с применением  дополнительных мер контроля" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell338" Border.Lines="All" Text="по оценке соответствующего органа, рассматривающего вопросы" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell339" Border.Lines="All" Text="Доля в общем количестве вопросов" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell340" Border.Lines="All" Text="Сравнение долей" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell341" Border.Lines="All" Text="в том числе по оценке АГ" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell342" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell343" Border.Lines="All" Text="в том числе с дополнительными мерами контроля" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="5"/>
+          <TableCell Name="Cell344" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell345" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell346" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell347" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell348" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row10" Height="292.95">
+          <TableCell Name="Cell349" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell350" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell351" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell352" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell353" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell354" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell355" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell356" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell357" Border.Lines="All" Text="из Личного кабинета" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell358" Border.Lines="All" Text="несовпадающей  с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell359" Border.Lines="All" Text="до принятия мер" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell360" Border.Lines="All" Text="с учетом мнения автора обращения по принятому решению" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell361" Border.Lines="All" Text="в том числе с положительной оценкой автора" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell362" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell363" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell364" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell365" Border.Lines="All" Text="из Личного кабинета" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell366" Border.Lines="All" Text="несовпадающей с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell367" Border.Lines="All" Text="с учетом мнения автора обращения" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell368" Border.Lines="All" Text="в том числе с положительной оценкой автора" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell369" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell370" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell371" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell372" Border.Lines="All" Text="работником" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell373" Border.Lines="All" Text="несовпадающей  с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell374" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell375" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell376" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell377" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell378" Border.Lines="All" Text="работником" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell379" Border.Lines="All" Text="несовпадающей  с оценкой органа" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell380" Border.Lines="All" Text="до выполнения рекомендаций" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell381" Border.Lines="All" Text="до принятия решения" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell382" Border.Lines="All" Text="до принятия мер" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell383" Border.Lines="All" Text="с учетом мнения автора обращения" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell384" Border.Lines="All" Text="в том числе с положительной оценкой автора" HorzAlign="Center" VertAlign="Center" Angle="270" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell385" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row11">
+          <TableCell Name="Cell386" Border.Lines="All" Text="1" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell387" Border.Lines="All" Text="2" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell388" Border.Lines="All" Text="3" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell389" Border.Lines="All" Text="4" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell390" Border.Lines="All" Text="5" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell391" Border.Lines="All" Text="6" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell392" Border.Lines="All" Text="7" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell393" Border.Lines="All" Text="8" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell394" Border.Lines="All" Text="9" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell395" Border.Lines="All" Text="10" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell396" Border.Lines="All" Text="11" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell397" Border.Lines="All" Text="12" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell398" Border.Lines="All" Text="13" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell399" Border.Lines="All" Text="14" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell400" Border.Lines="All" Text="15" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell401" Border.Lines="All" Text="16" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell402" Border.Lines="All" Text="17" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell403" Border.Lines="All" Text="18" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell404" Border.Lines="All" Text="19" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell405" Border.Lines="All" Text="20" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell406" Border.Lines="All" Text="21" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell407" Border.Lines="All" Text="22" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell408" Border.Lines="All" Text="23" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell409" Border.Lines="All" Text="24" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell410" Border.Lines="All" Text="25" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell411" Border.Lines="All" Text="26" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell412" Border.Lines="All" Text="27" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell413" Border.Lines="All" Text="28" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell414" Border.Lines="All" Text="29" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell415" Border.Lines="All" Text="30" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell416" Border.Lines="All" Text="31" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell417" Border.Lines="All" Text="32" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell418" Border.Lines="All" Text="33" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell419" Border.Lines="All" Text="34" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell420" Border.Lines="All" Text="35" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell421" Border.Lines="All" Text="36" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell422" Border.Lines="All" Text="37" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader2" Top="514.3" Width="2759.4" Height="28.35" Condition="[OMSUTable.BusinessUnit]">
+      <TextObject Name="Text53" Width="2734.83" Height="28.35" Fill.Color="255, 255, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text37" Width="372.33" Height="28.35" Text="[OMSUTable.BusinessUnit]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text38" Left="591.57" Width="66.15" Height="28.35" Text="[OMSUTable.BUSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text42" Left="374.22" Width="52.92" Height="28.35" Text="[OMSUTable.BUReviewed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text43" Left="657.72" Width="66.15" Height="28.35" Text="[OMSUTable.BUSupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text39" Left="1118.88" Width="66.15" Height="28.35" Text="[OMSUTable.BUActionsTakenCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text40" Left="1610.28" Width="66.15" Height="28.35" Text="[OMSUTable.BUNotSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text44" Left="1185.03" Width="66.15" Height="28.35" Text="[OMSUTable.BUActionsTakenProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text45" Left="1676.43" Width="66.15" Height="28.35" Text="[OMSUTable.BUNotSupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text41" Left="2007.18" Width="66.15" Height="28.35" Text="[OMSUTable.BUExplainedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text46" Left="2073.33" Width="66.15" Height="28.35" Text="[OMSUTable.BUExplainedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text47" Left="2668.68" Width="66.15" Height="28.35" Text="[OMSUTable.BUActiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text48" Left="532.98" Width="56.7" Height="28.35" Text="[OMSUTable.BUCitizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text49" Left="721.98" Width="66.15" Height="28.35" Text="[OMSUTable.BUSupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text50" Left="1251.18" Width="66.15" Height="28.35" Text="[OMSUTable.BUActionsTakenShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text51" Left="1742.58" Width="66.15" Height="28.35" Text="[OMSUTable.BUNotSupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text52" Left="2139.48" Width="66.15" Height="28.35" Text="[OMSUTable.BUExplainedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <DataBand Name="Data3" Top="546.65" Width="2759.4" Height="28.35" DataSource="Table1">
+        <TextObject Name="Text21" Width="372.33" Height="28.35" Text="[OMSUTable.DName]" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text22" Left="374.22" Width="52.92" Height="28.35" Text="[OMSUTable.Reviewed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text23" Left="532.98" Width="56.7" Height="28.35" Text="[OMSUTable.citizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text24" Left="591.57" Width="66.15" Height="28.35" Text="[OMSUTable.supportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text25" Left="657.72" Width="66.15" Height="28.35" Text="[OMSUTable.SupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text26" Left="1118.88" Width="66.15" Height="28.35" Text="[OMSUTable.actionsTakenCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text27" Left="1610.28" Width="66.15" Height="28.35" Text="[OMSUTable.notSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text28" Left="2007.18" Width="66.15" Height="28.35" Text="[OMSUTable.explainedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text29" Left="2668.68" Width="66.15" Height="28.35" Text="[OMSUTable.activeCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text30" Left="1185.03" Width="66.15" Height="28.35" Text="[OMSUTable.ActionsTakenProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text31" Left="1676.43" Width="66.15" Height="28.35" Text="[OMSUTable.NotSupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text32" Left="2073.33" Width="66.15" Height="28.35" Text="[OMSUTable.ExplainedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text33" Left="721.98" Width="66.15" Height="28.35" Text="[OMSUTable.SupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text34" Left="1251.18" Width="66.15" Height="28.35" Text="[OMSUTable.ActionsTakenShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text35" Left="1742.58" Width="66.15" Height="28.35" Text="[OMSUTable.NotSupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text36" Left="2139.48" Width="66.15" Height="28.35" Text="[OMSUTable.ExplainedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      </DataBand>
+    </GroupHeaderBand>
+    <DataBand Name="Data4" Top="579" Width="2759.4" Height="28.35">
+      <TableObject Name="Table2" Width="2735.17" Height="28.35" Fill.Color="255, 192, 192">
+        <TableColumn Name="Column112" Width="374.22"/>
+        <TableColumn Name="Column113" Width="52.92"/>
+        <TableColumn Name="Column114" Width="52.92"/>
+        <TableColumn Name="Column115" Width="52.92"/>
+        <TableColumn Name="Column116" Width="57.04"/>
+        <TableColumn Name="Column117"/>
+        <TableColumn Name="Column118"/>
+        <TableColumn Name="Column119"/>
+        <TableColumn Name="Column120"/>
+        <TableColumn Name="Column121"/>
+        <TableColumn Name="Column122"/>
+        <TableColumn Name="Column123"/>
+        <TableColumn Name="Column124"/>
+        <TableColumn Name="Column125"/>
+        <TableColumn Name="Column126"/>
+        <TableColumn Name="Column127"/>
+        <TableColumn Name="Column128"/>
+        <TableColumn Name="Column129"/>
+        <TableColumn Name="Column130" Width="94.5"/>
+        <TableColumn Name="Column131"/>
+        <TableColumn Name="Column132"/>
+        <TableColumn Name="Column133"/>
+        <TableColumn Name="Column134"/>
+        <TableColumn Name="Column135"/>
+        <TableColumn Name="Column136"/>
+        <TableColumn Name="Column137"/>
+        <TableColumn Name="Column138"/>
+        <TableColumn Name="Column139"/>
+        <TableColumn Name="Column140"/>
+        <TableColumn Name="Column141"/>
+        <TableColumn Name="Column142"/>
+        <TableColumn Name="Column143"/>
+        <TableColumn Name="Column144"/>
+        <TableColumn Name="Column145"/>
+        <TableColumn Name="Column146"/>
+        <TableColumn Name="Column147"/>
+        <TableColumn Name="Column148"/>
+        <TableRow Name="Row12" Height="28.35">
+          <TableCell Name="Cell423" Text="Всего по ОМСУ:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell424" Text="[TotalReviewed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell425" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell426" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell427" Text="[TotalCitizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell428" Text="[TotalSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell429" Text="[ReportsModule.PublicFunctions.Module.GetProportion([TotalSupportedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell430" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell431" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell432" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell433" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell434" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell435" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell436" Text="[TotalActionsTakenCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell437" Text="[SC.CitizenRequestsModule.PublicFunctions.Module.GetProportion([TotalActionsTakenCount], [TotalSupportedCount]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell438" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell439" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell440" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell441" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell442" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell443" Text="[TotalNotSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell444" Text="[SC.CitizenRequestsModule.PublicFunctions.Module.GetProportion([TotalNotSupportedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell445" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell446" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell447" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell448" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell449" Text="[TotalExplainedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell450" Text="[SC.CitizenRequestsModule.PublicFunctions.Module.GetProportion([TotalExplainedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell451" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell452" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell453" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell454" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell455" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell456" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell457" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell458" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell459" Text="[TotalActiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+  </ReportPage>
+</Report>

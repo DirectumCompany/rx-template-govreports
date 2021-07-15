@@ -187,6 +187,17 @@ namespace GD.ReportsModule.Server
     
     #endregion
     
+    /// <summary>
+    /// Рассчитать долю.
+    /// </summary>
+    [Public]
+    public double? GetProportion(double? dividend, double? divider)
+    {
+      if (dividend == 0 || divider == 0 || dividend == null || divider == null)
+        return null;
+      
+      return dividend / divider;
+    }
     #endregion
 
   }

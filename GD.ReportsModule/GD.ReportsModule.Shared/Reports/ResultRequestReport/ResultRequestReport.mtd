@@ -1,0 +1,70 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "195c6d8d-20aa-48fa-8e3d-46c2e31f50a6",
+  "Name": "ResultRequestReport",
+  "AssociatedGuid": "376044cb-ef49-498f-862a-c3d856784c07",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Pdf",
+    "Excel"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "Parameters",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "20923eec-c70c-487a-9204-8849f6728492",
+      "Name": "StartDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "966e7c6b-c3cf-4049-a074-59f321b4b86e",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "d3feefbe-144b-4101-887b-0cd71826e0bc",
+      "Name": "BusinessUnitTypeGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "7bc54e2c-d4e3-4e28-bbd6-1ac8f1e5e247",
+      "Name": "RequestGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "09eb91ff-cd82-4773-9496-05dd54eda465",
+      "Name": "AllBusinessUnits",
+      "InternalDataTypeName": "System.Boolean",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "e579b458-69b6-4bca-b5e8-69815986ef15",
+      "Name": "BusinessUnitId",
+      "InternalDataTypeName": "System.Int32",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}

@@ -11,13 +11,28 @@
   "CompanyCode": "GD",
   "Cover": {
     "NameGuid": "7f6d72d6-3754-49e3-8894-7e8ad28c7191",
-    "Actions": [],
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "092f39c0-d466-481b-8428-9a7283f967b9",
+        "Name": "AllReports",
+        "FunctionName": "ShowAllReports",
+        "GroupId": "97580002-6f99-48b2-a71c-8d05c0c44a0a"
+      }
+    ],
     "Background": null,
     "Footer": {
       "NameGuid": "5b70d322-e9b7-4dd7-9b01-1bfd55072531",
       "BackgroundPosition": "Stretch"
     },
-    "Groups": [],
+    "Groups": [
+      {
+        "NameGuid": "97580002-6f99-48b2-a71c-8d05c0c44a0a",
+        "Name": "ReportsGroup",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconGroup_975800026f9948b2a71c8d05c0c44a0a.png"
+      }
+    ],
     "Header": {
       "NameGuid": "45c929fc-fc6a-4c72-a967-9233866875fc",
       "BackgroundPosition": "Stretch"
@@ -34,6 +49,10 @@
   "ExplorerTreeOrder": [
     {
       "ItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b"
+    },
+    {
+      "ItemId": "195c6d8d-20aa-48fa-8e3d-46c2e31f50a6",
+      "PreviousItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b"
     }
   ],
   "HandledEvents": [
@@ -43,7 +62,6 @@
   "Importance": "Medium",
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "InterfaceNamespace": "GD.ReportsModule",
-  "IsVisible": false,
   "Overridden": [
     "IsVisible"
   ],
@@ -94,6 +112,23 @@
       "ReturnTypeFullName": "System.String"
     },
     {
+      "Name": "GetProportion",
+      "Parameters": [
+        {
+          "Name": "dividend",
+          "ParameterType": "global::System.Nullable<global::System.Double>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "divider",
+          "ParameterType": "global::System.Nullable<global::System.Double>",
+          "ParameterTypeFullName": "System.Nullable"
+        }
+      ],
+      "ReturnType": "global::System.Nullable<global::System.Double>",
+      "ReturnTypeFullName": "System.Nullable"
+    },
+    {
       "Name": "OpenDraftResolution",
       "Parameters": [
         {
@@ -130,7 +165,10 @@
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "GD.ReportsModule",
   "ResourcesKeys": [
-    "Deadline"
+    "Deadline",
+    "StartDate",
+    "EndDate",
+    "ReportParameters"
   ],
   "ServerAssemblyName": "GD.ReportsModule.Server",
   "ServerNamespace": "GD.ReportsModule.Server",
