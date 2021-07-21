@@ -48,11 +48,19 @@
   ],
   "ExplorerTreeOrder": [
     {
-      "ItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b"
+      "ItemId": "afa0c3aa-50ff-453e-87a1-39a696f8917b"
+    },
+    {
+      "ItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b",
+      "PreviousItemId": "afa0c3aa-50ff-453e-87a1-39a696f8917b"
     },
     {
       "ItemId": "195c6d8d-20aa-48fa-8e3d-46c2e31f50a6",
       "PreviousItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b"
+    },
+    {
+      "ItemId": "c6253ca5-723c-45f2-a698-fd29a5c5fb95",
+      "PreviousItemId": "195c6d8d-20aa-48fa-8e3d-46c2e31f50a6"
     }
   ],
   "HandledEvents": [
@@ -168,7 +176,10 @@
     "Deadline",
     "StartDate",
     "EndDate",
-    "ReportParameters"
+    "ReportParameters",
+    "Quarter",
+    "Year",
+    "NotSet"
   ],
   "ServerAssemblyName": "GD.ReportsModule.Server",
   "ServerNamespace": "GD.ReportsModule.Server",

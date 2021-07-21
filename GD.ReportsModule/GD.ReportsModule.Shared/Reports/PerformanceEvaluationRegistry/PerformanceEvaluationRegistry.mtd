@@ -1,0 +1,99 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "c6253ca5-723c-45f2-a698-fd29a5c5fb95",
+  "Name": "PerformanceEvaluationRegistry",
+  "AssociatedGuid": "376044cb-ef49-498f-862a-c3d856784c07",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Excel"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "DisplayName",
+    "Description",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents",
+    "Parameters"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "362742ff-e133-47ef-aa4b-711e92e02d44",
+      "Name": "StartDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "60ffa902-2ff6-4df5-abb1-2ef846556ce0",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "4ae6aa28-850e-4c4f-a634-3f1cc506d66b",
+      "Name": "LQStartDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "e6abe130-191a-4799-bcc7-976688fbec76",
+      "Name": "LQEndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "5a8d609a-d1cf-4f2e-96a2-650fb2f54a26",
+      "Name": "QNumber",
+      "InternalDataTypeName": "System.Int32",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "01de7532-c5f3-4cc7-a9a0-40d6f5f12562",
+      "Name": "LQNumber",
+      "InternalDataTypeName": "System.Int32",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "572e1747-6f8f-46fe-9896-9b7b3a662691",
+      "Name": "BusinessUnitTypeGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "e2114501-2514-4af4-86fd-3e2bc0edec07",
+      "Name": "BusinessUnitId",
+      "InternalDataTypeName": "System.Int32",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "39316866-fc15-4e17-b389-efc010d6beca",
+      "Name": "AllBusinessUnits",
+      "InternalDataTypeName": "System.Boolean",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "1432954f-ce86-4329-ba57-8b7cda9f91ff",
+      "Name": "NotSet",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}

@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = GD.ReportsModule.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table8" Alias="IOGV" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${IOGV}">
+        <Column Name="QuestionName" DataType="System.String" PropName="Column"/>
+        <Column Name="QFullCode" DataType="System.String" PropName="Column"/>
+        <Column Name="BUName" DataType="System.String" PropName="Column"/>
+        <Column Name="LQQCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LQQShare" DataType="System.Double" PropName="Column"/>
+        <Column Name="QCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="QShare" DataType="System.Double" PropName="Column"/>
+        <Column Name="SectionCode" DataType="System.String" PropName="Column"/>
+        <Column Name="SectionName" DataType="System.String" PropName="Column"/>
+        <Column Name="LQQShareChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="QShareChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQPopActivity" DataType="System.Double" PropName="Column"/>
+        <Column Name="PopActivity" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQPopActivityChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="PopActivityChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQQSectionCount" DataType="System.Double" PropName="Column"/>
+        <Column Name="QSectionCount" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQQSectionShare" DataType="System.Double" PropName="Column"/>
+        <Column Name="QSectionShare" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQQSectionShareChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="QSectionShareChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQSectionPopActivity" DataType="System.Double" PropName="Column"/>
+        <Column Name="SectionPopActivity" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQSectionPopActivityChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="SectionPopActivityChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQBUQCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="BUQCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LQBUShare" Enabled="false" DataType="System.Double" PropName="Column"/>
+        <Column Name="BUShare" Enabled="false" DataType="System.Double" PropName="Column"/>
+        <Column Name="LQQBUShareChange" Enabled="false" DataType="System.Double" PropName="Column"/>
+        <Column Name="QBUShareChange" Enabled="false" DataType="System.Double" PropName="Column"/>
+        <Column Name="AvgLQQShareChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="AvgQShareChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="AvgLQPopActivityChange" DataType="System.Double" PropName="Column"/>
+        <Column Name="AvgPopActivityChange" DataType="System.Double" PropName="Column"/>
+        <CommandParameter Name="StartDate" DataType="6" IsDbType="true" Expression="[StartDate]"/>
+        <CommandParameter Name="EndDate" DataType="6" IsDbType="true" Expression="[EndDate]"/>
+        <CommandParameter Name="LQStartDate" DataType="6" IsDbType="true" Expression="[LQStartDate]"/>
+        <CommandParameter Name="LQEndDate" DataType="6" IsDbType="true" Expression="[LQEndDate]"/>
+        <CommandParameter Name="BusinessUnitId" DataType="11" IsDbType="true" Expression="[BusinessUnitId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="38f223cc-8aed-4d92-b0bc-5b4e8efe6d8c" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="StartDate" Id="362742ff-e133-47ef-aa4b-711e92e02d44" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" Id="60ffa902-2ff6-4df5-abb1-2ef846556ce0" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="LQStartDate" Id="4ae6aa28-850e-4c4f-a634-3f1cc506d66b" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="LQEndDate" Id="e6abe130-191a-4799-bcc7-976688fbec76" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="QNumber" Id="5a8d609a-d1cf-4f2e-96a2-650fb2f54a26" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="LQNumber" Id="01de7532-c5f3-4cc7-a9a0-40d6f5f12562" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitTypeGuid" Id="572e1747-6f8f-46fe-9896-9b7b3a662691" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" Id="e2114501-2514-4af4-86fd-3e2bc0edec07" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AllBusinessUnits" Id="39316866-fc15-4e17-b389-efc010d6beca" IsRequired="true" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="NotSet" Id="1432954f-ce86-4329-ba57-8b7cda9f91ff" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="ИОГВ" Landscape="true" PaperWidth="790" PaperHeight="210" RawPaperSize="0" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="2910.6" Height="463.05">
+      <TextObject Name="Text1" Left="415.8" Top="56.7" Width="2079" Height="66.15" Text="Реестр оценки эффективности на основе анализа количества&#13;&#10;и характера обращений граждан, лиц без гражданства, объединений граждан, в том числе юридических лиц поступившим в Организацию с [StartDate] по [EndDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text2" Left="2494.8" Width="415.8" Height="122.85" Text="Приложение к распоряжению Управления Президента Российской Федерации по работе с обращениями граждан и организаций" HorzAlign="Right" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TableObject Name="Table1" Top="122.85" Width="2910.6" Height="340.2">
+        <TableColumn Name="Column1" Width="151.2"/>
+        <TableColumn Name="Column2" Width="264.6"/>
+        <TableColumn Name="Column3" Width="94.5"/>
+        <TableColumn Name="Column4" Width="94.5"/>
+        <TableColumn Name="Column5" Width="94.5"/>
+        <TableColumn Name="Column6" Width="94.5"/>
+        <TableColumn Name="Column7" Width="94.5"/>
+        <TableColumn Name="Column8" Width="103.95"/>
+        <TableColumn Name="Column9" Width="103.95"/>
+        <TableColumn Name="Column10" Width="103.95"/>
+        <TableColumn Name="Column11" Width="94.5"/>
+        <TableColumn Name="Column12" Width="94.5"/>
+        <TableColumn Name="Column13" Width="94.5"/>
+        <TableColumn Name="Column14" Width="94.5"/>
+        <TableColumn Name="Column15" Width="94.5"/>
+        <TableColumn Name="Column16" Width="103.95"/>
+        <TableColumn Name="Column17" Width="103.95"/>
+        <TableColumn Name="Column18" Width="103.95"/>
+        <TableColumn Name="Column19" Width="103.95"/>
+        <TableColumn Name="Column20" Width="103.95"/>
+        <TableColumn Name="Column21" Width="94.5"/>
+        <TableColumn Name="Column22" Width="103.95"/>
+        <TableColumn Name="Column23" Width="103.95"/>
+        <TableColumn Name="Column24" Width="103.95"/>
+        <TableColumn Name="Column25" Width="103.95"/>
+        <TableColumn Name="Column26" Width="103.95"/>
+        <TableColumn Name="Column27" Width="103.95"/>
+        <TableRow Name="Row1" Height="47.25">
+          <TableCell Name="Cell1" Border.Lines="All" Text="Код и наименование вопроса в соответствии с типовым тематическим классификатором" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="2" RowSpan="3"/>
+          <TableCell Name="Cell2" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="Фактические показатели до управляющего воздействия за предыдущий отчетный период ([LQNumber] квартал [Year([LQStartDate])])" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="5">
+            <Formats>
+              <NumberFormat UseLocale="false" DecimalDigits="0" DecimalSeparator="," GroupSeparator=" " NegativePattern="1"/>
+              <DateFormat/>
+            </Formats>
+          </TableCell>
+          <TableCell Name="Cell4" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell5" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell26" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell27" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell28" Border.Lines="All" Text="Управляющее воздействие" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="3"/>
+          <TableCell Name="Cell29" Border.Lines="All" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell30" Border.Lines="All" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell31" Border.Lines="All" Text="Фактические показатели после управляющего воздействия за отчетный период ([QNumber] квартал [Year([StartDate])])" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="5">
+            <Formats>
+              <NumberFormat UseLocale="false" DecimalDigits="0" DecimalSeparator="," GroupSeparator=" " NegativePattern="1"/>
+              <DateFormat/>
+            </Formats>
+          </TableCell>
+          <TableCell Name="Cell32" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell33" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell34" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell35" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell36" Border.Lines="All" Text="Оценка результатов  управляющего воздействия" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="2"/>
+          <TableCell Name="Cell37" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell38" Border.Lines="All" Text="Корректирующее управляющее воздействие" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="3"/>
+          <TableCell Name="Cell39" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell40" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell41" Border.Lines="All" Text="Прогноз" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="3"/>
+          <TableCell Name="Cell42" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell43" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell44" Border.Lines="All" Text="Фактические показатели после корректирующего управляющего воздействия" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="2"/>
+          <TableCell Name="Cell45" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell46" Border.Lines="All" Text="Оценка результатов корректирующего управляющего воздействия" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" ColSpan="2"/>
+          <TableCell Name="Cell157" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="94.5">
+          <TableCell Name="Cell6" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="Количество вопросов" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="Доля в общем кол-ве вопросов, поступивших в ОИВ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="Изменение доли относительного среднего по ОИВ  показателя" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell47" Border.Lines="All" Text="Активность населения на 10 тыс." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell48" Border.Lines="All" BeforePrintEvent="Cell48_BeforePrint" Text="Изменение активности относительного среднего по ОИВ  показателя" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell49" Border.Lines="All" Text="дата начала реализации управляющего воздействия" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell50" Border.Lines="All" Text="уровень управляющего воздействия" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell51" Border.Lines="All" Text="наименование органа" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell52" Border.Lines="All" Text="Количество вопросов" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell53" Border.Lines="All" Text="Доля в общем кол-ве вопросов, поступивших в ОИВ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell54" Border.Lines="All" Text="Изменение доли относительного среднего по ОИВ  показателя" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell55" Border.Lines="All" Text="Активность населения на 10 тыс." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell56" Border.Lines="All" Text="Изменение активности относительного среднего по ОИВ показателя" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell57" Border.Lines="All" Text="по доле" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell58" Border.Lines="All" Text="по активности" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell59" Border.Lines="All" Text="дата начала реализации корректирующего управляющего воздействия" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell60" Border.Lines="All" Text="уровень корректирующего управляющего воздействия" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell61" Border.Lines="All" Text="наименование органа" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell62" Border.Lines="All" Text="Период (месяц, квартал, год)" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell63" Border.Lines="All" Text="доля в общем количестве вопросов, поступивших в ОИВ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell64" Border.Lines="All" Text="активность населения на 10 тыс." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell65" Border.Lines="All" Text="доля в общем количестве вопросов, поступивших в ОИВ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell66" Border.Lines="All" Text="активность населения на 10 тыс." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell67" Border.Lines="All" Text="по доле" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+          <TableCell Name="Cell158" Border.Lines="All" Text="по активности" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" RowSpan="2"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="179.55">
+          <TableCell Name="Cell11" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell13" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell68" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell69" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell70" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell71" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell72" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell73" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell74" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell75" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell76" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell77" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell78" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell79" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell80" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell81" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell82" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell83" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell84" Border.Lines="All" Text="/изменение доли относительно среднего по ОИВ показателя/" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell85" Border.Lines="All" Text="/изменение активности относительно среднего по ОИВ показателя/" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell86" Border.Lines="All" Text="/изменение доли относительно среднего по ОИВ показателя/" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell87" Border.Lines="All" Text="/изменение активности относительно среднего по ОИВ показателя/" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell88" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell159" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell16" Border.Lines="All" Text="1 - код" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell17" Border.Lines="All" Text="1 - наименование" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" Text="2" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell19" Border.Lines="All" Text="3" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell20" Border.Lines="All" Text="4" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell89" Border.Lines="All" Text="5" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell90" Border.Lines="All" Text="6" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell91" Border.Lines="All" Text="7" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell92" Border.Lines="All" Text="8" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell93" Border.Lines="All" Text="9" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell94" Border.Lines="All" Text="10" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell95" Border.Lines="All" Text="11" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell96" Border.Lines="All" Text="12" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell97" Border.Lines="All" Text="13" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell98" Border.Lines="All" Text="14" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell99" Border.Lines="All" Text="15" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell100" Border.Lines="All" Text="16" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell101" Border.Lines="All" Text="17" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell102" Border.Lines="All" Text="18" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell103" Border.Lines="All" Text="19" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell104" Border.Lines="All" Text="20" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell105" Border.Lines="All" Text="21" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell106" Border.Lines="All" Text="22" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell107" Border.Lines="All" Text="23" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell108" Border.Lines="All" Text="24" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell109" Border.Lines="All" Text="25" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell160" Border.Lines="All" Text="26" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text8" Width="122.85" Height="18.9" Text="Приложение 4" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="467.05" Width="2910.6" Height="28.35" CanGrow="true" Condition="[IOGVTO.BUName]">
+      <TextObject Name="Text9" Width="2929.5" Height="28.35" Fill.Color="192, 255, 192" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Width="415.8" Height="28.35" CanGrow="true" GrowToBottom="true" Text="Всего по [IOGV.BUName]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text100" Left="415.8" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQBUQCount]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text101" Left="1200.15" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.BUQCount]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <GroupHeaderBand Name="GroupHeader2" Top="499.4" Width="2910.6" Height="28.35" CanGrow="true" Condition="[IOGVTO.SectionCode]" SortOrder="None">
+        <TextObject Name="Text129" Width="2929.5" Height="28.35" Fill.Color="255, 255, 192" Font="Arial, 10pt"/>
+        <TextObject Name="Text6" Width="151.2" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IIf([IOGV.SectionCode] == &quot;&quot;, [NotSet], [IOGV.SectionCode])]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text83" Left="151.2" Width="264.6" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IIf([IOGV.SectionName] == &quot;&quot;, [NotSet], [IOGV.SectionName])]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text84" Left="415.8" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQQSectionCount]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text85" Left="510.3" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQQSectionShare]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text86" Left="1200.15" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.QSectionCount]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text87" Left="1294.65" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.QSectionShare]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text94" Left="604.8" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQQSectionShareChange]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text95" Left="1389.15" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.QSectionShareChange]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text96" Left="699.3" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQSectionPopActivity]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text97" Left="1483.65" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.SectionPopActivity]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text98" Left="793.8" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQSectionPopActivityChange]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text99" Left="1578.15" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.SectionPopActivityChange]" HideZeros="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+        <DataBand Name="Data1" Top="531.75" Width="2910.6" Height="28.35" CanGrow="true" DataSource="Table8">
+          <TextObject Name="Text3" Left="415.8" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQQCount]" HideZeros="true" NullValue="0" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text80" Left="510.3" Width="94.5" Height="28.35" GrowToBottom="true" Text="[IOGV.LQQShare]" HideZeros="true" NullValue="0" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text81" Left="1200.15" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.QCount]" HideZeros="true" NullValue="0" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text82" Left="1294.65" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.QShare]" HideZeros="true" NullValue="0" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text4" Left="151.2" Width="264.6" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IIf([IOGV.QuestionName] == &quot;&quot;, [NotSet], [IOGV.QuestionName])]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text5" Width="151.2" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IIf([IOGV.QFullCode] == &quot;&quot;, [NotSet], [IOGV.QFullCode])]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text88" Left="604.8" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQQShareChange]" HideZeros="true" NullValue="0" ProcessAt="GroupFinished" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt">
+            <Highlight>
+              <Condition Expression="Value &gt; [IOGVTO.AvgLQQShareChange]" Fill.Color="Red" Font="Arial, 10pt" ApplyFill="true" ApplyTextFill="false"/>
+            </Highlight>
+          </TextObject>
+          <TextObject Name="Text89" Left="1389.15" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.QShareChange]" HideZeros="true" NullValue="0" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt">
+            <Highlight>
+              <Condition Expression="Value &gt; [IOGVTO.AvgQShareChange]" Fill.Color="Red" Font="Arial, 10pt" ApplyFill="true" ApplyTextFill="false"/>
+            </Highlight>
+          </TextObject>
+          <TextObject Name="Text90" Left="699.3" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQPopActivity]" HideZeros="true" NullValue="0" ProcessAt="GroupFinished" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text91" Left="793.8" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.LQPopActivityChange]" HideZeros="true" NullValue="0" ProcessAt="GroupFinished" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt">
+            <Highlight>
+              <Condition Expression="Value &gt; [IOGVTO.AvgLQPopActivityChange]" Fill.Color="Red" Font="Arial, 10pt" ApplyFill="true" ApplyTextFill="false"/>
+            </Highlight>
+          </TextObject>
+          <TextObject Name="Text92" Left="1483.65" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.PopActivity]" HideZeros="true" NullValue="0" ProcessAt="GroupFinished" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text93" Left="1578.15" Width="94.5" Height="28.35" CanGrow="true" GrowToBottom="true" Text="[IOGV.PopActivityChange]" HideZeros="true" NullValue="0" ProcessAt="GroupFinished" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt">
+            <Highlight>
+              <Condition Expression="Value &gt; [IOGVTO.AvgPopActivityChange]" Fill.Color="Red" Font="Arial, 10pt" ApplyFill="true" ApplyTextFill="false"/>
+            </Highlight>
+          </TextObject>
+          <Sort>
+            <Sort Expression="[IOGVTO.BUName]"/>
+            <Sort Expression="[IOGVTO.QFullCode]"/>
+          </Sort>
+        </DataBand>
+      </GroupHeaderBand>
+    </GroupHeaderBand>
+  </ReportPage>
+</Report>

@@ -129,4 +129,13 @@
   <data name="ReportParameters" xml:space="preserve">
     <value>Параметры отчета</value>
   </data>
+  <data name="Quarter" xml:space="preserve">
+    <value>Квартал</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Год</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>Не задано</value>
+  </data>
 </root>

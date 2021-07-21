@@ -7,7 +7,6 @@
   "DataSources": [],
   "DefaultExportFormat": "Excel",
   "ExportFormats": [
-    "Pdf",
     "Excel"
   ],
   "HandledEvents": [
@@ -38,30 +37,16 @@
       "IsSimpleDataType": true
     },
     {
-      "NameGuid": "d3feefbe-144b-4101-887b-0cd71826e0bc",
-      "Name": "BusinessUnitTypeGuid",
-      "InternalDataTypeName": "System.String",
-      "IsRequired": true
-    },
-    {
-      "NameGuid": "7bc54e2c-d4e3-4e28-bbd6-1ac8f1e5e247",
-      "Name": "RequestGuid",
-      "InternalDataTypeName": "System.String",
-      "IsRequired": true
-    },
-    {
-      "NameGuid": "09eb91ff-cd82-4773-9496-05dd54eda465",
-      "Name": "AllBusinessUnits",
-      "InternalDataTypeName": "System.Boolean",
-      "IsRequired": true,
-      "IsSimpleDataType": true
-    },
-    {
       "NameGuid": "e579b458-69b6-4bca-b5e8-69815986ef15",
       "Name": "BusinessUnitId",
       "InternalDataTypeName": "System.Int32",
       "IsRequired": true,
       "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "d51dee89-34ee-4bf7-aaae-6498b15073cd",
+      "Name": "RequestGuid",
+      "InternalDataTypeName": "System.String"
     }
   ],
   "PublicStructures": [],
