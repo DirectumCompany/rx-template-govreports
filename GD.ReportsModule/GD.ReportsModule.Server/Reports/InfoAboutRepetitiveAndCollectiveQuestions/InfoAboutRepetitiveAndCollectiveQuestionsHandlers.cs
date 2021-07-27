@@ -6,7 +6,7 @@ using Sungero.CoreEntities;
 
 namespace GD.ReportsModule
 {
-  partial class PerformanceEvaluationRegistryServerHandlers
+  partial class InfoAboutRepetitiveAndCollectiveQuestionsServerHandlers
   {
 
   }

@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = GD.ReportsModule.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table2" Alias="M" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Managers}">
+        <Column Name="RequestId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="ManagerName" DataType="System.String" PropName="Column"/>
+        <Column Name="RegNumber" DataType="System.String" PropName="Column"/>
+        <Column Name="RegDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="CorName" DataType="System.String" PropName="Column"/>
+        <Column Name="RequestDeadline" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="RCompleteDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="HasRCompleteDate" DataType="System.Int16" PropName="Column"/>
+        <CommandParameter Name="StartDate" DataType="6" IsDbType="true" Expression="[StartDate]"/>
+        <CommandParameter Name="EndDate" DataType="6" IsDbType="true" Expression="[EndDate]"/>
+        <CommandParameter Name="BusinessUnitId" DataType="11" IsDbType="true" Expression="[BusinessUnitId]"/>
+        <CommandParameter Name="RequestGuid" DataType="16" IsDbType="true" Expression="[RequestGuid]"/>
+        <CommandParameter Name="ActionItemExecutionTaskGuid" DataType="16" IsDbType="true" Expression="[ActionItemExecutionTaskGuid]"/>
+        <CommandParameter Name="ActionItemExecutionAssignmentGuid" DataType="16" IsDbType="true" Expression="[ActionItemExecutionAssignmentGuid]"/>
+        <CommandParameter Name="DocumentReviewTaskGuid" DataType="16" IsDbType="true" Expression="[DocumentReviewTaskGuid]"/>
+        <CommandParameter Name="ActionItemExecutionTaskDocumentsGroupGuid" DataType="16" IsDbType="true" Expression="[ActionItemExecutionTaskDocumentsGroupGuid]"/>
+        <CommandParameter Name="DocumentReviewTaskDocumentForReviewGroupGuid" DataType="16" IsDbType="true" Expression="[DocumentReviewTaskDocumentForReviewGroupGuid]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table4" Alias="P" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Performers}">
+        <Column Name="RequestId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="ManagerName" DataType="System.String" PropName="Column"/>
+        <Column Name="BUName" DataType="System.String" PropName="Column"/>
+        <Column Name="AssignmentDeadline" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="ACompleteDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="Delay" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RegNumber" Enabled="false" DataType="System.String" PropName="Column"/>
+        <Column Name="HasACompleteDate" DataType="System.Int16" PropName="Column"/>
+        <CommandParameter Name="StartDate" DataType="6" IsDbType="true" Expression="[StartDate]"/>
+        <CommandParameter Name="EndDate" DataType="6" IsDbType="true" Expression="[EndDate]"/>
+        <CommandParameter Name="BusinessUnitId" DataType="11" IsDbType="true" Expression="[BusinessUnitId]"/>
+        <CommandParameter Name="RequestGuid" DataType="16" IsDbType="true" Expression="[RequestGuid]"/>
+        <CommandParameter Name="ActionItemExecutionTaskGuid" DataType="16" IsDbType="true" Expression="[ActionItemExecutionTaskGuid]"/>
+        <CommandParameter Name="ActionItemExecutionAssignmentGuid" DataType="16" IsDbType="true" Expression="[ActionItemExecutionAssignmentGuid]"/>
+        <CommandParameter Name="DocumentReviewTaskGuid" DataType="16" IsDbType="true" Expression="[DocumentReviewTaskGuid]"/>
+        <CommandParameter Name="ActionItemExecutionTaskDocumentsGroupGuid" DataType="16" IsDbType="true" Expression="[ActionItemExecutionTaskDocumentsGroupGuid]"/>
+        <CommandParameter Name="DocumentReviewTaskDocumentForReviewGroupGuid" DataType="16" IsDbType="true" Expression="[DocumentReviewTaskDocumentForReviewGroupGuid]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="94cd55c9-24e9-4623-865f-a111309d1676" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="StartDate" Id="d0074c6a-4ccb-492a-842a-2c90e73e6c8e" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" Id="63892cdf-6eba-4f9a-b0b0-4a194cd8547f" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" Id="a21d2648-80e2-4168-99bd-0a42bc8a50f5" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnit" Id="a3b4d276-592f-4ffd-8599-53546c1c422d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RequestGuid" Id="9ba2a55d-e049-4351-aa2f-dc762e075183" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ActionItemExecutionTaskGuid" Id="726c9b51-12d9-4721-a339-ffcaebd8024d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ActionItemExecutionAssignmentGuid" Id="6c607566-22ba-4553-b13c-aaec919b7074" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentReviewTaskGuid" Id="dfc0e5c0-d81b-42b3-8153-02d1d815d390" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ActionItemExecutionTaskDocumentsGroupGuid" Id="6074ffd0-731a-4037-9439-1deac7eb3c0f" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentReviewTaskDocumentForReviewGroupGuid" Id="c28c9ced-9a8f-4289-a259-6ac5ebb08fb7" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="NotAllQuestionsAreAnswered" Id="7aed6781-374f-479f-bcc0-35c5c8f1d6f8" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="NotAllOrdersHaveBeenCompleted" Id="db4a4b02-964f-42b5-9393-564d90990cd2" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <Total Name="ManagerTotal" TotalType="Count" Evaluator="Data3" PrintOn="GroupFooter1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="450" PaperHeight="210" RawPaperSize="0" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1625.4" Height="151.2">
+      <TableObject Name="Table1" Left="9.45" Top="66.15" Width="1606.5" Height="85.05" Border.Lines="All">
+        <TableColumn Name="Column1" Width="303.45"/>
+        <TableColumn Name="Column2" Width="180.6"/>
+        <TableColumn Name="Column3" Width="275.1"/>
+        <TableColumn Name="Column4" Width="114.45"/>
+        <TableColumn Name="Column5" Width="114.45"/>
+        <TableColumn Name="Column6" Width="275.1"/>
+        <TableColumn Name="Column7" Width="114.45"/>
+        <TableColumn Name="Column8" Width="114.45"/>
+        <TableColumn Name="Column9" Width="114.45"/>
+        <TableRow Name="Row1" Height="66.15">
+          <TableCell Name="Cell1" Border.Lines="All" Text="Руководители" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="№ регистр. дата рег. источник поступления" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell3" Border.Lines="All" Text="ФИО заявителя" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell4" Border.Lines="All" Text="Срок исполнения обращения" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell5" Border.Lines="All" Text="Фактическая дата исполнения обращения" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell26" Border.Lines="All" Text="Исполнители" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell27" Border.Lines="All" Text="Срок исполнения поручения" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell28" Border.Lines="All" Text="Фактическая  дата исполнения поручения" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell29" Border.Lines="All" Text="Количество дней просрочки" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Border.Lines="All" Text="1" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="2" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="3" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="4" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="5" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell30" Border.Lines="All" Text="6" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell31" Border.Lines="All" Text="7" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell32" Border.Lines="All" Text="8" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell33" Border.Lines="All" Text="9" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text1" Left="9.45" Top="28.35" Width="1606.5" Height="37.8" Text="Реестр просрочек по руководителям [BusinessUnit] с [StartDate] по [EndDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold">
+        <Formats>
+          <GeneralFormat/>
+          <DateFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text2" Left="9.45" Top="9.45" Width="113.4" Height="18.9" Text="Приложение 8" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader2" Top="155.2" Width="1625.4" Condition="[M.ManagerName]">
+      <DataBand Name="Data3" Top="159.2" Width="1625.4" Height="9.45" DataSource="Table2">
+        <TextObject Name="Text14" Left="9.45" Width="94.5" Height="9.45" Font="Arial, 10pt"/>
+        <DataBand Name="Data4" Top="172.65" Width="1625.4" Height="47.25" CanGrow="true" DataSource="Table4" Filter="[M.RequestId] == [P.RequestId] &amp;&amp; [M.ManagerName] == [P.ManagerName]">
+          <TextObject Name="Text15" Left="9.45" Width="302.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.ManagerName]" Duplicates="Merge" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text16" Left="311.85" Width="179.55" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.RegNumber]&#13;&#10;[M.RegDate]" Duplicates="Merge" HorzAlign="Center" Font="Arial, 10pt">
+            <Formats>
+              <GeneralFormat/>
+              <DateFormat/>
+              <GeneralFormat/>
+            </Formats>
+          </TextObject>
+          <TextObject Name="Text17" Left="491.4" Width="274.05" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.CorName]" Duplicates="Merge" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text18" Left="765.45" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.RequestDeadline]" Duplicates="Merge" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text19" Left="878.85" Width="122.85" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[IIf([M.HasRCompleteDate]==1, [M.RCompleteDate], [NotAllQuestionsAreAnswered])]" Duplicates="Merge" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text20" Left="1001.7" Width="274.05" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[P.BUName]" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text21" Left="1275.75" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[P.AssignmentDeadline]" HideZeros="true" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text22" Left="1389.15" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[IIf([P.HasACompleteDate]==1, [P.ACompleteDate], [NotAllOrdersHaveBeenCompleted])]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text23" Left="1502.55" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[P.Delay]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" Font="Arial, 10pt"/>
+          <Sort>
+            <Sort Expression="[P.ManagerName]"/>
+            <Sort Expression="[P.RequestId]"/>
+            <Sort Expression="[P.BUName]"/>
+          </Sort>
+        </DataBand>
+        <Sort>
+          <Sort Expression="[M.ManagerName]"/>
+        </Sort>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="223.9" Width="1625.4" Height="28.35" CanShrink="true">
+        <TextObject Name="Text3" Left="9.45" Width="302.4" Height="28.35" CanShrink="true" CanBreak="false" Text="[IIf([ManagerTotal] == 0, null, &quot;ИТОГО: &quot; + [ManagerTotal])]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" Font="Arial, 10pt, style=Bold"/>
+      </GroupFooterBand>
+    </GroupHeaderBand>
+  </ReportPage>
+</Report>

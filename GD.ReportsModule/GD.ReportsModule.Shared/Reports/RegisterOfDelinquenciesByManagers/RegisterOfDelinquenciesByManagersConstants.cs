@@ -3,7 +3,7 @@ using Sungero.Core;
 
 namespace GD.ReportsModule.Constants
 {
-  public static class PerformanceEvaluationRegistry
+  public static class RegisterOfDelinquenciesByManagers
   {
 
   }

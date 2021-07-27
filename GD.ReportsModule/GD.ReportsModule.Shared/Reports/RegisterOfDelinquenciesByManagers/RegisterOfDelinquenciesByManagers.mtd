@@ -1,0 +1,108 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "afb8efb6-9b63-4fc7-b8a3-b9236daab74c",
+  "Name": "RegisterOfDelinquenciesByManagers",
+  "AssociatedGuid": "376044cb-ef49-498f-862a-c3d856784c07",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Excel"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "DisplayName",
+    "Description",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents",
+    "Parameters"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "d0074c6a-4ccb-492a-842a-2c90e73e6c8e",
+      "Name": "StartDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "63892cdf-6eba-4f9a-b0b0-4a194cd8547f",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "a21d2648-80e2-4168-99bd-0a42bc8a50f5",
+      "Name": "BusinessUnitId",
+      "InternalDataTypeName": "System.Int32",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "a3b4d276-592f-4ffd-8599-53546c1c422d",
+      "Name": "BusinessUnit",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "9ba2a55d-e049-4351-aa2f-dc762e075183",
+      "Name": "RequestGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "726c9b51-12d9-4721-a339-ffcaebd8024d",
+      "Name": "ActionItemExecutionTaskGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "6c607566-22ba-4553-b13c-aaec919b7074",
+      "Name": "ActionItemExecutionAssignmentGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "dfc0e5c0-d81b-42b3-8153-02d1d815d390",
+      "Name": "DocumentReviewTaskGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "6074ffd0-731a-4037-9439-1deac7eb3c0f",
+      "Name": "ActionItemExecutionTaskDocumentsGroupGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "c28c9ced-9a8f-4289-a259-6ac5ebb08fb7",
+      "Name": "DocumentReviewTaskDocumentForReviewGroupGuid",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "7aed6781-374f-479f-bcc0-35c5c8f1d6f8",
+      "Name": "NotAllQuestionsAreAnswered",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "db4a4b02-964f-42b5-9393-564d90990cd2",
+      "Name": "NotAllOrdersHaveBeenCompleted",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "NotAllOrdersHaveBeenCompleted",
+    "NotAllQuestionsAreAnswered"
+  ],
+  "Versions": []
+}

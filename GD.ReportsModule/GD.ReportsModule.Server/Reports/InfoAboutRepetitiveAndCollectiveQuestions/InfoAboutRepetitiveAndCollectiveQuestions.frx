@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = GD.ReportsModule.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="Q" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Question}">
+        <Column Name="QFullCode" DataType="System.String" PropName="Column"/>
+        <Column Name="QuestionName" DataType="System.String" PropName="Column"/>
+        <Column Name="SectionCode" DataType="System.String" PropName="Column"/>
+        <Column Name="TopicCode" DataType="System.String" PropName="Column"/>
+        <Column Name="ThemeCode" DataType="System.String" PropName="Column"/>
+        <Column Name="SectionName" DataType="System.String" PropName="Column"/>
+        <Column Name="TopicName" DataType="System.String" PropName="Column"/>
+        <Column Name="ThemeName" DataType="System.String" PropName="Column"/>
+        <Column Name="LYCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Count" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYRepeatedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RepeatedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlRepeatedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlRepeatedCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYСollectiveCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="СollectiveCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlСollectiveCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlСollectiveCount" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYRepeatedCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RepeatedCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlRepeatedCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlRepeatedCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYСollectiveCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="СollectiveCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlСollectiveCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlСollectiveCountByTheme" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYRepeatedCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RepeatedCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlRepeatedCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlRepeatedCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYСollectiveCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="СollectiveCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlСollectiveCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlСollectiveCountByTopic" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYRepeatedCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RepeatedCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlRepeatedCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlRepeatedCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYСollectiveCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="СollectiveCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="LYCtrlСollectiveCountBySection" DataType="System.Int32" PropName="Column"/>
+        <Column Name="CtrlСollectiveCountBySection" DataType="System.Int32" PropName="Column"/>
+        <CommandParameter Name="LYStartDate" DataType="6" IsDbType="true" Expression="[LYStartDate]"/>
+        <CommandParameter Name="StartDate" DataType="6" IsDbType="true" Expression="[StartDate]"/>
+        <CommandParameter Name="LYEndDate" DataType="6" IsDbType="true" Expression="[LYEndDate]"/>
+        <CommandParameter Name="EndDate" DataType="6" IsDbType="true" Expression="[EndDate]"/>
+        <CommandParameter Name="BusinessUnitId" DataType="11" IsDbType="true" Expression="[BusinessUnitId]"/>
+        <CommandParameter Name="BusinessUnit" DataType="16" IsDbType="true" Expression="[BusinessUnit]"/>
+        <CommandParameter Name="RequestGuid" DataType="16" IsDbType="true" Expression="[RequestGuid]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="412d1fa9-6780-4b83-8d04-df902734f7a7" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="LYStartDate" Id="a34a8132-a729-4287-a9b3-96933a978fbe" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="LYEndDate" Id="b784c142-3262-4690-b217-a881431d04fd" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="StartDate" Id="4a0af8e5-ece9-4daf-a106-cb6e7412dd8d" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" Id="5861fcce-7b15-4547-b4d3-77d8b7d7a3cb" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" Id="9bb18d2d-647e-496c-b6a8-7d158bf7eaa4" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnit" Id="50ab8847-887f-4af2-b28d-7d0c410a81f1" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RequestGuid" Id="fbc9f430-1e9d-4047-b0a2-49807844015f" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <Total Name="TotalLYCount" Expression="[Q.LYCount]" Evaluator="Data1"/>
+    <Total Name="TotalCount" Expression="[Q.Count]" Evaluator="Data1"/>
+    <Total Name="TotalLYCtrlCount" Expression="[Q.LYCtrlCount]" Evaluator="Data1"/>
+    <Total Name="TotalCtrlCount" Expression="[Q.CtrlCount]" Evaluator="Data1"/>
+    <Total Name="TotalLYRepeatedCount" Expression="[Q.LYRepeatedCount]" Evaluator="Data1"/>
+    <Total Name="TotalRepeatedCount" Expression="[Q.RepeatedCount]" Evaluator="Data1"/>
+    <Total Name="TotalLYCtrlRepeatedCount" Expression="[Q.LYCtrlRepeatedCount]" Evaluator="Data1"/>
+    <Total Name="TotalCtrlRepeatedCount" Expression="[Q.CtrlRepeatedCount]" Evaluator="Data1"/>
+    <Total Name="TotalLYСollectiveCount" Expression="[Q.LYСollectiveCount]" Evaluator="Data1"/>
+    <Total Name="TotalСollectiveCount" Expression="[Q.СollectiveCount]" Evaluator="Data1"/>
+    <Total Name="TotalLYCtrlСollectiveCount" Expression="[Q.LYCtrlСollectiveCount]" Evaluator="Data1"/>
+    <Total Name="TotalCtrlСollectiveCount" Expression="[Q.CtrlСollectiveCount]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="450" RawPaperSize="0" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1625.4" Height="255.15">
+      <TableObject Name="Table1" Left="9.45" Top="28.35" Width="1606.5" Height="226.8">
+        <TableColumn Name="Column1" Width="151.2"/>
+        <TableColumn Name="Column2" Width="321.3"/>
+        <TableColumn Name="Column3" Width="94.5"/>
+        <TableColumn Name="Column4" Width="94.5"/>
+        <TableColumn Name="Column5" Width="94.5"/>
+        <TableColumn Name="Column6" Width="94.5"/>
+        <TableColumn Name="Column7" Width="94.5"/>
+        <TableColumn Name="Column8" Width="94.5"/>
+        <TableColumn Name="Column9" Width="94.5"/>
+        <TableColumn Name="Column10" Width="94.5"/>
+        <TableColumn Name="Column11" Width="94.5"/>
+        <TableColumn Name="Column12" Width="94.5"/>
+        <TableColumn Name="Column13" Width="94.5"/>
+        <TableColumn Name="Column14" Width="94.5"/>
+        <TableRow Name="Row1" Height="66.15">
+          <TableCell Name="Cell1" Border.Lines="All" Text="Информация о характере повторных, коллективных вопросов содержащихся&#13;&#10;в письменных обращениях, поступающих в [BusinessUnit] за период с [StartDate] по [EndDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="14">
+            <Formats>
+              <GeneralFormat/>
+              <DateFormat/>
+              <DateFormat/>
+            </Formats>
+          </TableCell>
+          <TableCell Name="Cell2" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell3" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell4" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell5" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell26" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell27" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell28" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell29" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell30" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell31" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell32" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell33" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell34" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="47.25">
+          <TableCell Name="Cell6" Border.Lines="All" Text="Раздел / тематика / тема / вопросы" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2" RowSpan="3"/>
+          <TableCell Name="Cell7" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="Всего поступило вопросов" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell9" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="Поставлено на контроль" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell35" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell36" Border.Lines="All" Text="Повторные" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="4"/>
+          <TableCell Name="Cell37" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell38" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell39" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell40" Border.Lines="All" Text="Коллективные" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="4"/>
+          <TableCell Name="Cell41" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell42" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell43" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="28.35">
+          <TableCell Name="Cell11" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell12" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell13" Border.Lines="All" Text="Аналогичный период предыдущего года" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="Отчетный период" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell15" Border.Lines="All" Text="Аналогичный период предыдущего года" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell44" Border.Lines="All" Text="Отчетный период" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell45" Border.Lines="All" Text="Аналогичный период предыдущего года" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell46" Border.Lines="All" Text="Отчетный период" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell47" Border.Lines="All" Text="в том числе на контроле" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell48" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell49" Border.Lines="All" Text="Аналогичный период предыдущего года" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell50" Border.Lines="All" Text="Отчетный период" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell51" Border.Lines="All" Text="в том числе на контроле" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell52" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="66.15">
+          <TableCell Name="Cell16" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell17" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell19" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell20" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell53" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell54" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell55" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell56" Border.Lines="All" Text="Аналогичный период предыдущего года" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell57" Border.Lines="All" Text="Отчетный период" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell58" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell59" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell60" Border.Lines="All" Text="Аналогичный период предыдущего года" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell61" Border.Lines="All" Text="Отчетный период" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row5">
+          <TableCell Name="Cell21" Border.Lines="All" Text="1" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell22" Border.Lines="All" Text="2" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell23" Border.Lines="All" Text="3" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell24" Border.Lines="All" Text="4" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell25" Border.Lines="All" Text="5" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell62" Border.Lines="All" Text="6" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell63" Border.Lines="All" Text="7" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell64" Border.Lines="All" Text="8" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell65" Border.Lines="All" Text="9" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell66" Border.Lines="All" Text="10" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell67" Border.Lines="All" Text="11" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell68" Border.Lines="All" Text="12" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell69" Border.Lines="All" Text="13" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell70" Border.Lines="All" Text="14" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text1" Left="9.45" Width="132.3" Height="18.9" Text="Приложение 10" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="259.15" Width="1625.4" Height="28.35" CanGrow="true" Condition="[Q.SectionCode]">
+      <TextObject Name="Text44" Left="9.45" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.SectionCode]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text45" Left="160.65" Width="321.3" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.SectionName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text46" Left="481.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text47" Left="576.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text48" Left="670.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text49" Left="765.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text50" Left="859.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYRepeatedCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text51" Left="954.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.RepeatedCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text52" Left="1048.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlRepeatedCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text53" Left="1143.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlRepeatedCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text54" Left="1237.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYСollectiveCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text55" Left="1332.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.СollectiveCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text56" Left="1426.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlСollectiveCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text57" Left="1521.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlСollectiveCountBySection]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <GroupHeaderBand Name="GroupHeader3" Top="291.5" Width="1625.4" Height="28.35" CanGrow="true" Condition="[Q.TopicCode]">
+        <TextObject Name="Text30" Left="9.45" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.SectionCode].[Q.TopicCode]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text31" Left="160.65" Width="321.3" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.TopicName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text32" Left="481.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text33" Left="576.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text34" Left="670.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text35" Left="765.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text36" Left="859.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYRepeatedCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text37" Left="954.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.RepeatedCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text38" Left="1048.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlRepeatedCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text39" Left="1143.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlRepeatedCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text40" Left="1237.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYСollectiveCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text41" Left="1332.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.СollectiveCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text42" Left="1426.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlСollectiveCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text43" Left="1521.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="192, 255, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlСollectiveCountByTopic]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        <GroupHeaderBand Name="GroupHeader2" Top="323.85" Width="1625.4" Height="28.35" CanGrow="true" Condition="[Q.ThemeCode]">
+          <TextObject Name="Text16" Left="9.45" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.SectionCode].[Q.TopicCode].[Q.ThemeCode]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text17" Left="160.65" Width="321.3" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.ThemeName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text18" Left="481.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text19" Left="576.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text20" Left="670.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text21" Left="765.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text22" Left="859.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYRepeatedCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text23" Left="954.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.RepeatedCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text24" Left="1048.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlRepeatedCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text25" Left="1143.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlRepeatedCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text26" Left="1237.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYСollectiveCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text27" Left="1332.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.СollectiveCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text28" Left="1426.95" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlСollectiveCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text29" Left="1521.45" Width="94.5" Height="28.35" Border.Lines="All" Fill.Color="255, 255, 192" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlСollectiveCountByTheme]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <DataBand Name="Data1" Top="356.2" Width="1625.4" Height="28.35" CanGrow="true" DataSource="Table">
+            <TextObject Name="Text2" Left="9.45" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.QFullCode]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text3" Left="160.65" Width="321.3" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.QuestionName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text4" Left="481.95" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text5" Left="576.45" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.Count]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text6" Left="670.95" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text7" Left="765.45" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text8" Left="859.95" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYRepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text9" Left="954.45" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.RepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text10" Left="1048.95" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlRepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text11" Left="1143.45" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlRepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text12" Left="1237.95" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYСollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text13" Left="1332.45" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.СollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text14" Left="1426.95" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.LYCtrlСollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <TextObject Name="Text15" Left="1521.45" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.CtrlСollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+            <Sort>
+              <Sort Expression="[Q.QFullCode]"/>
+            </Sort>
+          </DataBand>
+        </GroupHeaderBand>
+      </GroupHeaderBand>
+    </GroupHeaderBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="388.55" Width="1625.4" Height="28.35" CanGrow="true">
+      <TableObject Name="Table1" Left="9.45" Width="1606.5" Height="28.35" Fill.Color="255, 192, 192" GrowToBottom="true">
+        <TableColumn Name="Column71" Width="151.2"/>
+        <TableColumn Name="Column72" Width="321.3"/>
+        <TableColumn Name="Column73" Width="94.5"/>
+        <TableColumn Name="Column74" Width="94.5"/>
+        <TableColumn Name="Column75" Width="94.5"/>
+        <TableColumn Name="Column76" Width="94.5"/>
+        <TableColumn Name="Column77" Width="94.5"/>
+        <TableColumn Name="Column78" Width="94.5"/>
+        <TableColumn Name="Column79" Width="94.5"/>
+        <TableColumn Name="Column80" Width="94.5"/>
+        <TableColumn Name="Column81" Width="94.5"/>
+        <TableColumn Name="Column82" Width="94.5"/>
+        <TableColumn Name="Column83" Width="94.5"/>
+        <TableColumn Name="Column84" Width="94.5"/>
+        <TableRow Name="Row10" Height="28.35">
+          <TableCell Name="Cell127" Border.Lines="All" Text="Итого вопросов" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell128" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell129" Border.Lines="All" Text="[TotalLYCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell130" Border.Lines="All" Text="[TotalCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell131" Border.Lines="All" Text="[TotalLYCtrlCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell132" Border.Lines="All" Text="[TotalCtrlCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell133" Border.Lines="All" Text="[TotalLYRepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell134" Border.Lines="All" Text="[TotalRepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell135" Border.Lines="All" Text="[TotalLYCtrlRepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell136" Border.Lines="All" Text="[TotalCtrlRepeatedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell137" Border.Lines="All" Text="[TotalLYСollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell138" Border.Lines="All" Text="[TotalСollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell139" Border.Lines="All" Text="[TotalLYCtrlСollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell140" Border.Lines="All" Text="[TotalCtrlСollectiveCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </ReportSummaryBand>
+  </ReportPage>
+</Report>
