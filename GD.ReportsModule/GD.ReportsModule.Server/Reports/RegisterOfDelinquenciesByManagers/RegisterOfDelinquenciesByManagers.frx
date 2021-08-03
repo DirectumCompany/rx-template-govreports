@@ -126,7 +126,6 @@ namespace FastReport
           <DateFormat/>
         </Formats>
       </TextObject>
-      <TextObject Name="Text2" Left="9.45" Top="9.45" Width="113.4" Height="18.9" Text="Приложение 8" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
     </ReportTitleBand>
     <GroupHeaderBand Name="GroupHeader2" Top="155.2" Width="1625.4" Condition="[M.ManagerName]">
       <DataBand Name="Data3" Top="159.2" Width="1625.4" Height="9.45" DataSource="Table2">

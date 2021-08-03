@@ -183,7 +183,8 @@
     "ReportParameters",
     "Quarter",
     "Year",
-    "NotSet"
+    "NotSet",
+    "AllBusinessUnits"
   ],
   "ServerAssemblyName": "GD.ReportsModule.Server",
   "ServerNamespace": "GD.ReportsModule.Server",

@@ -49,14 +49,16 @@ namespace FastReport
         <Column Name="ExplainedShareComparison" DataType="System.Double" PropName="Column"/>
         <CommandParameter Name="StartDate" DataType="5" IsDbType="true" Expression="[StartDate]"/>
         <CommandParameter Name="EndDate" DataType="5" IsDbType="true" Expression="[EndDate]"/>
+        <CommandParameter Name="AllBusinessUnit" DataType="3" IsDbType="true" Expression="[AllBusinessUnit]"/>
         <CommandParameter Name="BusinessUnitId" DataType="11" IsDbType="true" Expression="[BusinessUnitId]"/>
       </TableDataSource>
     </SungeroSqlDataConnection>
     <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="98c81df1-cb96-444f-b91d-2992e4b2b657" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="StartDate" Id="20923eec-c70c-487a-9204-8849f6728492" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="EndDate" Id="966e7c6b-c3cf-4049-a074-59f321b4b86e" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="BusinessUnitId" Id="e579b458-69b6-4bca-b5e8-69815986ef15" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AllBusinessUnit" Id="e579b458-69b6-4bca-b5e8-69815986ef15" IsRequired="true" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="RequestGuid" Id="d51dee89-34ee-4bf7-aaae-6498b15073cd" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" Id="333bb6d7-34bd-4180-9bff-cf7cac960c6d" IsRequired="false" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <Total Name="TotalReviewed" Expression="[IOGVTable.Reviewed]" Evaluator="Data1"/>
     <Total Name="TotalCitizensAmount" Expression="[IOGVTable.citizensAmount]" Evaluator="Data1"/>
     <Total Name="TotalSupportedCount" Expression="[IOGVTable.supportedCount]" Evaluator="Data1"/>
@@ -73,13 +75,12 @@ namespace FastReport
           <DateFormat/>
         </Formats>
       </TextObject>
-      <TextObject Name="Text19" Width="122.85" Height="18.9" Text="Приложение 2" Font="Arial, 10pt, style=Bold"/>
     </ReportTitleBand>
-    <DataBand Name="Data1" Top="518.3" Width="2759.4" Height="28.35" DataSource="Table">
+    <DataBand Name="Data1" Top="518.3" Width="2759.4" Height="29.35" DataSource="Table">
       <TextObject Name="Text2" Width="368.55" Height="28.35" Text="[IOGVTable.BusinessUnit]" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text3" Left="374.22" Width="52.92" Height="28.35" Text="[IOGVTable.Reviewed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text4" Left="532.98" Width="56.7" Height="28.35" Text="[IOGVTable.citizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text5" Left="591.57" Width="66.15" Height="28.35" Text="[IOGVTable.supportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="591.57" Width="66.15" Height="28.35" Text="[IOGVTable.supportedCount]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="0" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text6" Left="657.72" Width="66.15" Height="28.35" Text="[IOGVTable.SupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="1118.88" Width="66.15" Height="28.35" Text="[IOGVTable.actionsTakenCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text8" Left="1610.28" Width="66.15" Height="28.35" Text="[IOGVTable.notSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
@@ -88,10 +89,10 @@ namespace FastReport
       <TextObject Name="Text11" Left="1185.03" Width="66.15" Height="28.35" Text="[IOGVTable.ActionsTakenProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text12" Left="1676.43" Width="66.15" Height="28.35" Text="[IOGVTable.NotSupportedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text13" Left="2073.33" Width="66.15" Height="28.35" Text="[IOGVTable.ExplainedProportion]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text14" Left="721.98" Width="66.15" Height="28.35" Text="[IOGVTable.SupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text15" Left="1251.18" Width="66.15" Height="28.35" Text="[IOGVTable.ActionsTakenShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text16" Left="1742.58" Width="66.15" Height="28.35" Text="[IOGVTable.NotSupportedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text17" Left="2139.48" Width="66.15" Height="28.35" Text="[IOGVTable.ExplainedShareComparison]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Left="724.65" Width="66.15" Height="28.35" Text="[IOGVTable.SupportedShareComparison]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="1252.4" Width="66.15" Height="28.35" Text="[IOGVTable.ActionsTakenShareComparison]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="1743.8" Width="66.15" Height="28.35" Text="[IOGVTable.NotSupportedShareComparison]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text17" Left="2137.7" Width="66.15" Height="28.35" Text="[IOGVTable.ExplainedShareComparison]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" VertAlign="Center" Font="Arial, 10pt"/>
       <DataHeaderBand Name="DataHeader1" Top="60.7" Width="2759.4" Height="453.6">
         <TableObject Name="TitleTable" Width="2735.17" Height="453.6" Border.Lines="Top">
           <TableColumn Name="Column1" Width="374.22"/>
@@ -329,7 +330,7 @@ namespace FastReport
         </TableObject>
       </DataHeaderBand>
     </DataBand>
-    <DataBand Name="Data2" Top="550.65" Width="2759.4" Height="28.35">
+    <DataBand Name="Data2" Top="551.65" Width="2759.4" Height="28.35">
       <TableObject Name="TotalTable" Width="2735.17" Height="28.35" Fill.Color="255, 192, 192">
         <TableColumn Name="Column38" Width="374.22"/>
         <TableColumn Name="Column39" Width="52.92"/>
@@ -375,28 +376,28 @@ namespace FastReport
           <TableCell Name="Cell204" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell205" Fill.Color="255, 192, 192" Text="[TotalCitizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell206" Fill.Color="255, 192, 192" Text="[TotalSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
-          <TableCell Name="Cell207" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalSupportedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell207" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalSupportedCount], [TotalReviewed]) * 100.00]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell208" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell209" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
-          <TableCell Name="Cell210" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell210" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt"/>
           <TableCell Name="Cell211" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell212" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell213" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell214" Fill.Color="255, 192, 192" Text="[TotalActionsTakenCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
-          <TableCell Name="Cell215" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalActionsTakenCount], [TotalSupportedCount]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell215" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalActionsTakenCount], [TotalReviewed]) * 100.00]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell216" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell217" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell218" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell219" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell220" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell221" Fill.Color="255, 192, 192" Text="[TotalNotSupportedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
-          <TableCell Name="Cell222" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalNotSupportedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell222" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalNotSupportedCount], [TotalReviewed]) * 100.00]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell223" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell224" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell225" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell226" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell227" Fill.Color="255, 192, 192" Text="[TotalExplainedCount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
-          <TableCell Name="Cell228" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalExplainedCount], [TotalReviewed]) * 100]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell228" Fill.Color="255, 192, 192" Text="[GD.ReportsModule.PublicFunctions.Module.GetProportion([TotalExplainedCount], [TotalReviewed]) * 100.00]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="3" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell229" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell230" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
           <TableCell Name="Cell231" Fill.Color="255, 192, 192" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>

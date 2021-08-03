@@ -221,7 +221,6 @@ namespace FastReport
           <TableCell Name="Cell70" Border.Lines="All" Text="14" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
         </TableRow>
       </TableObject>
-      <TextObject Name="Text1" Left="9.45" Width="132.3" Height="18.9" Text="Приложение 10" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
     </ReportTitleBand>
     <GroupHeaderBand Name="GroupHeader1" Top="259.15" Width="1625.4" Height="28.35" CanGrow="true" Condition="[Q.SectionCode]">
       <TextObject Name="Text44" Left="9.45" Width="151.2" Height="28.35" Border.Lines="All" Fill.Color="192, 192, 255" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[Q.SectionCode]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>

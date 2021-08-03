@@ -19,7 +19,8 @@
     "Parameters",
     "ExportFormats",
     "DefaultExportFormat",
-    "HandledEvents"
+    "HandledEvents",
+    "DisplayName"
   ],
   "Parameters": [
     {
@@ -38,8 +39,8 @@
     },
     {
       "NameGuid": "e579b458-69b6-4bca-b5e8-69815986ef15",
-      "Name": "BusinessUnitId",
-      "InternalDataTypeName": "System.Int32",
+      "Name": "AllBusinessUnit",
+      "InternalDataTypeName": "System.Boolean",
       "IsRequired": true,
       "IsSimpleDataType": true
     },
@@ -47,6 +48,12 @@
       "NameGuid": "d51dee89-34ee-4bf7-aaae-6498b15073cd",
       "Name": "RequestGuid",
       "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "333bb6d7-34bd-4180-9bff-cf7cac960c6d",
+      "Name": "BusinessUnitId",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
     }
   ],
   "PublicStructures": [],

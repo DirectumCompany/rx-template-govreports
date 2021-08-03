@@ -138,4 +138,7 @@
   <data name="NotSet" xml:space="preserve">
     <value>Не задано</value>
   </data>
+  <data name="AllBusinessUnits" xml:space="preserve">
+    <value>Все организации</value>
+  </data>
 </root>

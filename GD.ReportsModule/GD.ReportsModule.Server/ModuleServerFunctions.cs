@@ -195,10 +195,8 @@ namespace GD.ReportsModule.Server
     {
       if (dividend == 0 || divider == 0 || dividend == null || divider == null)
         return null;
-      
       return dividend / divider;
     }
     #endregion
-
   }
 }

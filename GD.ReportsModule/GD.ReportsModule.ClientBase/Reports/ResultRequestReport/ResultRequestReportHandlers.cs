@@ -20,6 +20,7 @@ namespace GD.ReportsModule
       
       var dialog = Dialogs.CreateInputDialog(Resources.ReportParameters);
       var businessUnit = current.Department.BusinessUnit;
+      var allBusinessUnit = dialog.AddBoolean(Resources.AllBusinessUnits, true);
       var startDate = dialog.AddDate(Resources.StartDate, true, Calendar.BeginningOfYear(Calendar.Today));
       var endDate = dialog.AddDate(Resources.EndDate, true, Calendar.Today);
       
@@ -30,8 +31,8 @@ namespace GD.ReportsModule
       }
       ResultRequestReport.StartDate = startDate.Value.Value;
       ResultRequestReport.EndDate = endDate.Value.Value;
-      ResultRequestReport.BusinessUnitId = businessUnit.Id;      
-     // ResultRequestReport.RequestGuid = Constants.Module.RequestsDiscriminator.ToString();
+      ResultRequestReport.BusinessUnitId = businessUnit.Id;
+      ResultRequestReport.AllBusinessUnit = allBusinessUnit.Value == true;
     }
 
   }

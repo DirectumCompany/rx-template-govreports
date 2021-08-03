@@ -4,7 +4,7 @@
     <mssql><![CDATA[WITH ReviewedByBU AS
 (
   SELECT	b.name AS BusinessUnit,
- 		count (r.id) /*FILTER (WHERE r.citizensamount_main_gd IS NULL) +
+ 		count (distinct r.id) /*FILTER (WHERE r.citizensamount_main_gd IS NULL) +
  			coalesce(sum (r.citizensamount_main_gd) FILTER (WHERE r.citizensamount_main_gd IS NOT NULL), 0) раскомментировать после добавления кол-ва заявителей в ОБР*/
  			AS citizensAmount,
 		sum (case when (q.reviewresult = 'Supported' OR q.reviewresult = 'ActionsTaken') AND
@@ -22,8 +22,7 @@
 		sum (case when (q.reviewresult IS NULL OR
 					    q.reviewresult = 'Draft' OR
 					    q.reviewresult = 'InWorkExtended' OR
-					    q.reviewresult = 'ProvidedInterim')
-					    and q.Id IS NOT NULL then 1 else 0 end) AS activeCount,
+					    q.reviewresult = 'Transferred') then 1 else 0 end) AS activeCount,
 
 		sum (case when(q.reviewresult = 'Supported' OR q.reviewresult = 'ActionsTaken') AND 
 		               t.regdate_docflow_sungero >= @StartDate AND t.regdate_docflow_sungero <= @EndDate then 1 else 0 end) +
@@ -31,33 +30,32 @@
 		               t.regdate_docflow_sungero >= @StartDate AND t.regdate_docflow_sungero <= @EndDate then 1 else 0 end) +
 		sum (case when q.reviewresult = 'Explained' AND 
 		               t.regdate_docflow_sungero >= @StartDate AND t.regdate_docflow_sungero <= @EndDate then 1 else 0 end) AS Reviewed
-FROM	sungero_content_edoc t
-
-INNER JOIN	gd_citizen_reqquestions q ON t.id = q.transfer
-LEFT JOIN	sungero_content_edoc r ON q.edoc = r.id
-LEFT JOIN	sungero_core_recipient b ON r.businessunit_docflow_sungero = b.id
-WHERE
-		b.id = @BusinessUnitId
-
+FROM	gd_citizen_reqquestions  q 
+JOIN	sungero_content_edoc r ON q.edoc = r.id
+JOIN	sungero_content_edoc t ON t.id = ISNULL(ISNULL(q.transfer, r.answerletter_citizen_gd), r.coverletter_citizen_gd)
+JOIN	sungero_core_recipient b ON r.businessunit_docflow_sungero = b.id  
+WHERE 
+   @AllBusinessUnit = 'TRUE' or b.id = @BusinessUnitId
+    
 GROUP BY b.name ), 
 
 ReviewedByBusinessUnit AS
 (
 SELECT	*,
 		CASE WHEN Reviewed > 0
-		THEN supportedCount / Reviewed * 100 
+		THEN CONVERT(decimal(6,3), supportedCount * 100.0/ Reviewed) 
 		ELSE NULL END AS SupportedProportion,
 		
 		CASE WHEN Reviewed > 0 AND supportedCount > 0
-		THEN actionsTakenCount / supportedCount * 100 
+		THEN CONVERT(decimal(6,3), actionsTakenCount * 100.00/ Reviewed) 
 		ELSE NULL END AS ActionsTakenProportion,
 		
 		CASE WHEN Reviewed > 0
-		THEN notSupportedCount / Reviewed * 100 
+		THEN CONVERT(decimal(6,3),notSupportedCount * 100.00/ Reviewed)
 		ELSE NULL END AS NotSupportedProportion,
 		
 		CASE WHEN Reviewed > 0
-		THEN explainedCount / Reviewed * 100 
+		THEN CONVERT(decimal(6,3),explainedCount * 100.00/ Reviewed)
 		ELSE NULL END AS ExplainedProportion,
 	
 		SUM (supportedCount) OVER () AS TotalSupportedCount,
@@ -72,20 +70,20 @@ GROUP BY BusinessUnit, citizensAmount, supportedCount, actionsTakenCount, notSup
 )
 
 SELECT	*,
-		CASE WHEN TotalReviewed > 0
-		THEN (SupportedProportion - TotalSupportedCount) / TotalReviewed * 100
+		CASE WHEN SupportedProportion > 0
+		THEN (SELECT CONVERT(decimal(5,2), SUM(TotalSupportedCount) * 100.00 / SUM(TotalReviewed)) FROM	ReviewedByBusinessUnit) - SupportedProportion
 		ELSE NULL END AS SupportedShareComparison,
 		
-		CASE WHEN TotalSupportedCount > 0
-		THEN (ActionsTakenProportion - TotalActionsTakenCount) / TotalSupportedCount * 100
+		CASE WHEN ActionsTakenProportion > 0
+		THEN (SELECT CONVERT(decimal(5,2), SUM(TotalActionsTakenCount) * 100.00 / SUM(TotalReviewed)) FROM ReviewedByBusinessUnit) - ActionsTakenProportion
 		ELSE NULL END AS ActionsTakenShareComparison,
 		
-		CASE WHEN TotalReviewed > 0
-		THEN (NotSupportedProportion - TotalNoSupportedCount) / TotalReviewed * 100
+		CASE WHEN NotSupportedProportion > 0
+		THEN (SELECT CONVERT(decimal(5,2), SUM(TotalNoSupportedCount) * 100.00 / SUM(TotalReviewed)) FROM	ReviewedByBusinessUnit) - NotSupportedProportion 
 		ELSE NULL END AS NotSupportedShareComparison,
 		
-		CASE WHEN TotalReviewed > 0
-		THEN (ExplainedProportion - TotalExplainedCount) / TotalReviewed * 100
+		CASE WHEN ExplainedProportion > 0
+		THEN (SELECT CONVERT(decimal(5,2), SUM(TotalExplainedCount) * 100.00 / SUM(TotalReviewed)) FROM	ReviewedByBusinessUnit) - ExplainedProportion
 		ELSE NULL END AS ExplainedShareComparison
 		
 FROM	ReviewedByBusinessUnit
@@ -96,9 +94,9 @@ ORDER BY BusinessUnit ASC]]></mssql>
 WITH ReviewedByBU AS
 (
 SELECT	b.name AS BusinessUnit,
- 		count (r.id) /*FILTER (WHERE r.citizensamount_main_gd IS NULL) +
+ 		count (distinct r.id) /*FILTER (WHERE r.citizensamount_main_gd IS NULL) +
  			coalesce(sum (r.citizensamount_main_gd) FILTER (WHERE r.citizensamount_main_gd IS NOT NULL), 0) раскомментировать после добавления кол-ва заявителей в ОБР*/
- 			AS citizensAmount,
+ 			AS citizensAmount,																				   
 			
 		count (q.id) FILTER (WHERE (q.reviewresult = 'Supported' OR q.reviewresult = 'ActionsTaken') AND
 							(t.regdate_docflow_sungero >= @StartDate AND t.regdate_docflow_sungero <= @EndDate)) AS supportedCount,
@@ -118,22 +116,21 @@ SELECT	b.name AS BusinessUnit,
 							 q.reviewresult = 'ProvidedInterim') AS activeCount,
 		
 		COUNT (q.id) FILTER (WHERE (q.reviewresult = 'Supported' OR q.reviewresult = 'ActionsTaken') AND (t.regdate_docflow_sungero >= @StartDate AND t.regdate_docflow_sungero <= @EndDate)) +
+																													   
 		COUNT (q.id) FILTER (WHERE (q.reviewresult = 'NotSupported' OR q.reviewresult = 'Obsolete') AND (t.regdate_docflow_sungero >= @StartDate AND t.regdate_docflow_sungero <= @EndDate)) +
+																													   
 		COUNT (q.id) FILTER (WHERE q.reviewresult = 'Explained' AND t.regdate_docflow_sungero >= @StartDate AND t.regdate_docflow_sungero <= @EndDate)
 			AS Reviewed
-FROM	sungero_content_edoc t
+FROM	gd_citizen_reqquestions  q 
+JOIN	sungero_content_edoc r ON q.edoc = r.id
+JOIN	sungero_content_edoc t ON t.id = COALESCE(COALESCE(q.transfer, r.answerletter_citizen_gd), r.coverletter_citizen_gd)
+JOIN	sungero_core_recipient b ON r.businessunit_docflow_sungero = b.id  
 
-INNER JOIN	gd_citizen_reqquestions q ON t.id = q.transfer
-LEFT JOIN	sungero_content_edoc r ON q.edoc = r.id
-LEFT JOIN	sungero_core_recipient b ON r.businessunit_docflow_sungero = b.id
-
-WHERE
-    t.Discriminator = @RequestGuid AND
-		b.id = @BusinessUnitId
+WHERE 									  
+   @AllBusinessUnit = 'TRUE' or b.id = @BusinessUnitId
 
 GROUP BY BusinessUnit
 )
-
 SELECT	*,
 
 		CASE WHEN Reviewed > 0
@@ -165,19 +162,19 @@ GROUP BY BusinessUnit, citizensAmount, supportedCount, actionsTakenCount, notSup
 
 SELECT	*,
 		CASE WHEN TotalReviewed > 0
-		THEN SupportedProportion - TotalSupportedCount :: real / TotalReviewed * 100
+		THEN TotalSupportedCount :: real / TotalReviewed * 100 - SupportedProportion
 		ELSE NULL END AS SupportedShareComparison,
 		
-		CASE WHEN TotalSupportedCount > 0
-		THEN ActionsTakenProportion - TotalActionsTakenCount :: real / TotalSupportedCount * 100
+		CASE WHEN TotalReviewed > 0
+		THEN TotalActionsTakenCount :: real / TotalReviewed * 100 - ActionsTakenProportion
 		ELSE NULL END AS ActionsTakenShareComparison,
 		
 		CASE WHEN TotalReviewed > 0
-		THEN NotSupportedProportion - TotalNoSupportedCount :: real / TotalReviewed * 100
+		THEN TotalNoSupportedCount :: real / TotalReviewed * 100 - NotSupportedProportion
 		ELSE NULL END AS NotSupportedShareComparison,
 		
 		CASE WHEN TotalReviewed > 0
-		THEN ExplainedProportion - TotalExplainedCount :: real / TotalReviewed * 100
+		THEN TotalExplainedCount :: real / TotalReviewed * 100 - ExplainedProportion
 		ELSE NULL END AS ExplainedShareComparison
 		
 FROM	ReviewedByBusinessUnit
