@@ -161,20 +161,20 @@ GROUP BY BusinessUnit, citizensAmount, supportedCount, actionsTakenCount, notSup
 )
 
 SELECT	*,
-		CASE WHEN TotalReviewed > 0
-		THEN TotalSupportedCount :: real / TotalReviewed * 100 - SupportedProportion
+		CASE WHEN SupportedProportion > 0
+		THEN (SELECT SUM(TotalSupportedCount) :: real * 100 / SUM(TotalReviewed) FROM ReviewedByBusinessUnit) - SupportedProportion
 		ELSE NULL END AS SupportedShareComparison,
 		
-		CASE WHEN TotalReviewed > 0
-		THEN TotalActionsTakenCount :: real / TotalReviewed * 100 - ActionsTakenProportion
+		CASE WHEN ActionsTakenProportion > 0
+		THEN (SELECT SUM(TotalActionsTakenCount) :: real * 100 / SUM(TotalReviewed) FROM ReviewedByBusinessUnit) - ActionsTakenProportion
 		ELSE NULL END AS ActionsTakenShareComparison,
 		
-		CASE WHEN TotalReviewed > 0
-		THEN TotalNoSupportedCount :: real / TotalReviewed * 100 - NotSupportedProportion
+		CASE WHEN NotSupportedProportion > 0
+		THEN (SELECT SUM(TotalNoSupportedCount) :: real * 100 / SUM(TotalReviewed) FROM ReviewedByBusinessUnit) - NotSupportedProportion 
 		ELSE NULL END AS NotSupportedShareComparison,
 		
-		CASE WHEN TotalReviewed > 0
-		THEN TotalExplainedCount :: real / TotalReviewed * 100 - ExplainedProportion
+		CASE WHEN ExplainedProportion > 0
+		THEN (SELECT SUM(TotalExplainedCount) :: real * 100 / SUM(TotalReviewed) FROM ReviewedByBusinessUnit) - ExplainedProportion
 		ELSE NULL END AS ExplainedShareComparison
 		
 FROM	ReviewedByBusinessUnit
