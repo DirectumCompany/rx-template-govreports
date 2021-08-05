@@ -74,6 +74,7 @@
   "Importance": "Medium",
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "InterfaceNamespace": "GD.ReportsModule",
+  "IsVisible": false,
   "Overridden": [
     "IsVisible"
   ],
