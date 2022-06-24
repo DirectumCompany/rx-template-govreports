@@ -39,7 +39,7 @@ LEFT JOIN sungero_content_edoc qanswer ON q.transfer = qanswer.id
 WHERE	r.discriminator = @RequestGuid AND
   		r.regdate_docflow_sungero >= @StartDate AND r.regdate_docflow_sungero <= @EndDate AND
   		b.id = @BusinessUnitId AND
-		  task.id IS NOT NULL
+		task.id IS NOT NULL
 )
 
 SELECT	*,
