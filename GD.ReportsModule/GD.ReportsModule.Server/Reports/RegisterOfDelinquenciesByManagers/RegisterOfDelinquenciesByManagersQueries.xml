@@ -158,7 +158,10 @@ WHERE	r.discriminator = @RequestGuid AND
 		  asg.id IS NOT NULL
 )
 
-SELECT	*,
+SELECT *
+FROM 
+
+  (SELECT	*,
 		
 		CASE
 			WHEN ACompleteDate IS NULL THEN 0
@@ -167,17 +170,13 @@ SELECT	*,
 		
 		-- [9] Количество дней просрочки
 		CASE
-			WHEN ACompleteDate IS NULL THEN DATEPART(day, GETDATE() - RequestDeadline)
-			ELSE DATEPART(day, ACompleteDate - RequestDeadline)
+			WHEN ACompleteDate IS NULL THEN DATEDIFF(day, RequestDeadline, GETDATE())
+			ELSE DATEDIFF(day, RequestDeadline, ACompleteDate)
 		END AS Delay
 		
-FROM R
+  FROM R) AS ResultTable
 
-WHERE
-    CASE
-			WHEN ACompleteDate IS NULL THEN DATEPART(day, GETDATE() - RequestDeadline)
-			ELSE DATEPART(day, ACompleteDate - RequestDeadline)
-		END > 0
+WHERE Delay > 0
 
 ORDER BY ManagerName]]></mssql>
     <postgres><![CDATA[WITH R AS
@@ -239,7 +238,10 @@ WHERE	r.discriminator::citext = @RequestGuid AND
 		  asg.id IS NOT NULL
 )
 
-SELECT	*,
+SELECT *
+FROM
+
+  (SELECT	*,
 		
 		CASE
 			WHEN ACompleteDate IS NULL THEN 0
@@ -252,13 +254,9 @@ SELECT	*,
 			ELSE DATE_PART('day', ACompleteDate - RequestDeadline)::integer
 		END AS Delay
 		
-FROM R
-
-WHERE
-    CASE
-			WHEN ACompleteDate IS NULL THEN DATE_PART('day', CURRENT_DATE - RequestDeadline)::integer
-			ELSE DATE_PART('day', ACompleteDate - RequestDeadline)::integer
-		END > 0
+  FROM R) AS ResultTable
+  
+WHERE Delay > 0
 
 ORDER BY ManagerName]]></postgres>
   </query>
