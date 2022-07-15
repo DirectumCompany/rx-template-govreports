@@ -155,16 +155,16 @@ SELECT
 						r.isrepeated_citizen_gd) AS CtrlRepeatedCount,
 
 	COUNT (q.id) FILTER (WHERE r.regdate_docflow_sungero >= @LYStartDate AND r.regdate_docflow_sungero <= @LYEndDate AND
-						r.reqtype_main_gd = 2) AS LYСollectiveCount,
+						r.requesttype_citizen_gd = 'Collective') AS LYСollectiveCount,
 	COUNT (q.id) FILTER (WHERE r.regdate_docflow_sungero >= @StartDate AND r.regdate_docflow_sungero <= @EndDate AND
-						r.reqtype_main_gd = 2) AS СollectiveCount,
+						r.requesttype_citizen_gd = 'Collective') AS СollectiveCount,
 						
 	COUNT (q.id) FILTER (WHERE r.regdate_docflow_sungero >= @LYStartDate AND r.regdate_docflow_sungero <= @LYEndDate AND
 						(r.ControlExState_docflow_sungero = 'OnControl' OR r.ControlExState_docflow_sungero = 'SpecialControl' OR r.controlexstate_docflow_sungero = 'SpecialFZCtrl') AND
-						r.reqtype_main_gd = 2) AS LYCtrlСollectiveCount,
+						r.requesttype_citizen_gd = 'Collective') AS LYCtrlСollectiveCount,
 	COUNT (q.id) FILTER (WHERE r.regdate_docflow_sungero >= @StartDate AND r.regdate_docflow_sungero <= @EndDate AND
 						(r.ControlExState_docflow_sungero = 'OnControl' OR r.ControlExState_docflow_sungero = 'SpecialControl' OR r.controlexstate_docflow_sungero = 'SpecialFZCtrl') AND
-						r.reqtype_main_gd = 2) AS CtrlСollectiveCount
+						r.requesttype_citizen_gd = 'Collective') AS CtrlСollectiveCount
 
 FROM gd_citizen_reqquestions q
 
@@ -173,8 +173,6 @@ LEFT JOIN gd_citizen_classifierbase c ON q.question = c.id
 LEFT JOIN gd_citizen_classifierbase c_section ON c.section = c_section.id
 LEFT JOIN gd_citizen_classifierbase c_topic ON c.topic = c_topic.id
 LEFT JOIN gd_citizen_classifierbase c_theme ON c.theme = c_theme.id
-
-LEFT JOIN public.sc_citize1_requesttype rt ON r.reqtype_main_gd = rt.id
 
 WHERE	r.discriminator::citext = @RequestGuid AND
 		r.businessunit_docflow_sungero = @BusinessUnitId AND
