@@ -55,11 +55,11 @@
   ],
   "ExplorerTreeOrder": [
     {
-      "ItemId": "afa0c3aa-50ff-453e-87a1-39a696f8917b"
+      "ItemId": "030d8d67-9b94-4f0d-bcc6-691016eb70f3"
     },
     {
       "ItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b",
-      "PreviousItemId": "afa0c3aa-50ff-453e-87a1-39a696f8917b"
+      "PreviousItemId": "030d8d67-9b94-4f0d-bcc6-691016eb70f3"
     },
     {
       "ItemId": "195c6d8d-20aa-48fa-8e3d-46c2e31f50a6",
@@ -191,14 +191,15 @@
     "Quarter",
     "Year",
     "NotSet",
-    "AllBusinessUnits"
+    "AllBusinessUnits",
+    "OthersRecords"
   ],
   "ServerAssemblyName": "GD.ReportsModule.Server",
   "ServerNamespace": "GD.ReportsModule.Server",
   "SharedAssemblyName": "GD.ReportsModule.Shared",
   "SharedNamespace": "GD.ReportsModule.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.0",
+  "Version": "0.0.1.1",
   "Widgets": [],
   "Versions": [
     {

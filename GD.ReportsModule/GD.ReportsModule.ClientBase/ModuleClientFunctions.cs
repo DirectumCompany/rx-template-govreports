@@ -15,7 +15,7 @@ namespace GD.ReportsModule.Client
     public virtual void ShowAllReports()
     {
       var reports = ReportsModule.Reports.GetAll().ToList();
-      reports.AsEnumerable().Show(Sungero.RecordManagement.Resources.AllReportsTitle);
+      reports.AsEnumerable().Show(GD.ReportsModule.Resources.OthersRecords);
     }
 
     /// <summary>

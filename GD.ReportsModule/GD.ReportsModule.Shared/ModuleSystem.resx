@@ -65,13 +65,13 @@
     <value>Reports</value>
   </data>
   <data name="CoverGroup_ReportsGroup" xml:space="preserve">
-    <value>Reports</value>
+    <value>Others reports</value>
   </data>
   <data name="CoverAction_AllReports" xml:space="preserve">
-    <value>All reports</value>
+    <value>Others reports</value>
   </data>
   <data name="CoverDescription_AllReports" xml:space="preserve">
-    <value>List of all module reports.</value>
+    <value>List module reports.</value>
   </data>
   <data name="CoverTab_Tab" xml:space="preserve">
     <value>Tab</value>
