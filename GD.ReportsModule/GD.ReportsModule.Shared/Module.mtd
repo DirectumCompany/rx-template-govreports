@@ -30,13 +30,20 @@
         "NameGuid": "97580002-6f99-48b2-a71c-8d05c0c44a0a",
         "Name": "ReportsGroup",
         "BackgroundPosition": "Stretch",
-        "IconName": "GroupIconGroup_975800026f9948b2a71c8d05c0c44a0a.png"
+        "IconName": "GroupIconGroup_975800026f9948b2a71c8d05c0c44a0a.png",
+        "TabId": "653ee7e4-3dca-4d60-9e81-946e426fedde"
       }
     ],
     "Header": {
       "NameGuid": "45c929fc-fc6a-4c72-a967-9233866875fc",
       "BackgroundPosition": "Stretch"
-    }
+    },
+    "Tabs": [
+      {
+        "NameGuid": "653ee7e4-3dca-4d60-9e81-946e426fedde",
+        "Name": "Tab"
+      }
+    ]
   },
   "Dependencies": [
     {
@@ -196,7 +203,7 @@
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",
