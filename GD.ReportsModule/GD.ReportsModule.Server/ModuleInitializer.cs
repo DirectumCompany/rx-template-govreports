@@ -10,6 +10,11 @@ namespace GD.ReportsModule.Server
   public partial class ModuleInitializer
   {
 
+    public override bool IsModuleVisible()
+    {
+      return true;
+    }
+
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {
       // Создать таблицу отчета.

@@ -55,9 +55,6 @@
   ],
   "ExplorerTreeOrder": [
     {
-      "ItemId": "030d8d67-9b94-4f0d-bcc6-691016eb70f3"
-    },
-    {
       "ItemId": "0404cc5f-4785-4c84-b9f6-98941d60a84b",
       "PreviousItemId": "030d8d67-9b94-4f0d-bcc6-691016eb70f3"
     },
@@ -75,7 +72,8 @@
     }
   ],
   "HandledEvents": [
-    "InitializingServer"
+    "InitializingServer",
+    "VisibilityServer"
   ],
   "IconResourcesKeys": [],
   "Importance": "Medium",
