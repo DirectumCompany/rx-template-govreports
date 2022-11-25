@@ -46,11 +46,10 @@ namespace GD.ReportsModule.Server
           else
           {
             // Поручение с соисполнителями.
-            var deadline = actionItemTask.Deadline;
             var subAssignees = actionItemTask.CoAssignees.Select(a => a.Assignee).ToList();
             var data = GetActionItemDraftResolutionReportData(reportSessionId,
                                                               actionItemTask.Assignee,
-                                                              deadline,
+                                                              actionItemTask.Deadline,
                                                               string.Empty,
                                                               subAssignees.Any());
             reportData.Add(data);
@@ -59,7 +58,7 @@ namespace GD.ReportsModule.Server
             {
               var subAssigneeData = GetActionItemDraftResolutionReportData(reportSessionId,
                                                                            subAssignee,
-                                                                           deadline,
+                                                                           actionItemTask.CoAssigneesDeadline,
                                                                            string.Empty);
               reportData.Add(subAssigneeData);
             }
