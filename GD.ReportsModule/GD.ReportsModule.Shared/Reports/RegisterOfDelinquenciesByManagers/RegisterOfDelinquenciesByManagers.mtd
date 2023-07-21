@@ -42,7 +42,7 @@
     {
       "NameGuid": "a21d2648-80e2-4168-99bd-0a42bc8a50f5",
       "Name": "BusinessUnitId",
-      "InternalDataTypeName": "System.Int32",
+      "InternalDataTypeName": "System.Int64",
       "IsRequired": true,
       "IsSimpleDataType": true
     },
