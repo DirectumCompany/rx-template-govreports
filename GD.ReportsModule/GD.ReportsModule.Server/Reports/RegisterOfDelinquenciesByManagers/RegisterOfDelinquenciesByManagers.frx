@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Localization&#13;&#10;Sungero.Declension&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace FastReport
   <Dictionary>
     <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
       <TableDataSource Name="Table2" Alias="M" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Managers}">
-        <Column Name="RequestId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RequestId" DataType="System.Int64" PropName="Column"/>
         <Column Name="ManagerName" DataType="System.String" PropName="Column"/>
         <Column Name="RegNumber" DataType="System.String" PropName="Column"/>
         <Column Name="RegDate" DataType="System.DateTime" PropName="Column"/>
@@ -50,7 +50,7 @@ namespace FastReport
         <CommandParameter Name="DocumentReviewTaskDocumentForReviewGroupGuid" DataType="16" IsDbType="true" Expression="[DocumentReviewTaskDocumentForReviewGroupGuid]"/>
       </TableDataSource>
       <TableDataSource Name="Table4" Alias="P" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Performers}">
-        <Column Name="RequestId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RequestId" DataType="System.Int64" PropName="Column"/>
         <Column Name="ManagerName" DataType="System.String" PropName="Column"/>
         <Column Name="BUName" DataType="System.String" PropName="Column"/>
         <Column Name="AssignmentDeadline" DataType="System.DateTime" PropName="Column"/>
@@ -72,7 +72,7 @@ namespace FastReport
     <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="94cd55c9-24e9-4623-865f-a111309d1676" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="StartDate" Id="d0074c6a-4ccb-492a-842a-2c90e73e6c8e" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="EndDate" Id="63892cdf-6eba-4f9a-b0b0-4a194cd8547f" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="BusinessUnitId" Id="a21d2648-80e2-4168-99bd-0a42bc8a50f5" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" Id="a21d2648-80e2-4168-99bd-0a42bc8a50f5" IsRequired="true" IsCollection="false" InternalDataType="System.Int64" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="BusinessUnit" Id="a3b4d276-592f-4ffd-8599-53546c1c422d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="RequestGuid" Id="9ba2a55d-e049-4351-aa2f-dc762e075183" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="ActionItemExecutionTaskGuid" Id="726c9b51-12d9-4721-a339-ffcaebd8024d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Localization&#13;&#10;Sungero.Declension&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -101,7 +101,7 @@ namespace FastReport
     <SungeroParameter Name="LYEndDate" Id="b784c142-3262-4690-b217-a881431d04fd" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="StartDate" Id="4a0af8e5-ece9-4daf-a106-cb6e7412dd8d" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="EndDate" Id="5861fcce-7b15-4547-b4d3-77d8b7d7a3cb" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="BusinessUnitId" Id="9bb18d2d-647e-496c-b6a8-7d158bf7eaa4" IsRequired="true" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" Id="9bb18d2d-647e-496c-b6a8-7d158bf7eaa4" IsRequired="true" IsCollection="false" InternalDataType="System.Int64" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="BusinessUnit" Id="50ab8847-887f-4af2-b28d-7d0c410a81f1" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="RequestGuid" Id="fbc9f430-1e9d-4047-b0a2-49807844015f" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <Total Name="TotalLYCount" Expression="[Q.LYCount]" Evaluator="Data1"/>
