@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -25,7 +25,12 @@ namespace GD.ReportsModule.Server
       // Выдать права на отчёт.
       var allUsers = Roles.AllUsers;
       if (allUsers != null)
+      {
         Reports.AccessRights.Grant(Reports.GetDraftResolutionReport().Info, allUsers, DefaultReportAccessRightsTypes.Execute);
+        Reports.AccessRights.Grant(Reports.GetResultRequestReport().Info, allUsers, DefaultReportAccessRightsTypes.Execute);
+        Reports.AccessRights.Grant(Reports.GetRegisterOfDelinquenciesByManagers().Info, allUsers, DefaultReportAccessRightsTypes.Execute);
+        Reports.AccessRights.Grant(Reports.GetInfoAboutRepetitiveAndCollectiveQuestions().Info, allUsers, DefaultReportAccessRightsTypes.Execute);
+      }
     }
   }
 }
