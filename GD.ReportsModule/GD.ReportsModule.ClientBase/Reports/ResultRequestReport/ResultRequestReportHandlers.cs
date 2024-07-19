@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -11,7 +11,7 @@ namespace GD.ReportsModule
 
     public override void BeforeExecute(Sungero.Reporting.Client.BeforeExecuteEventArgs e)
     {
-      var current = Sungero.Company.Employees.Current;      
+      var current = Sungero.Company.Employees.Current;
       if (current == null || current.Department == null || current.Department.BusinessUnit == null)
       {
         e.Cancel = true;
@@ -21,6 +21,16 @@ namespace GD.ReportsModule
       var dialog = Dialogs.CreateInputDialog(Resources.ReportParameters);
       var businessUnit = current.Department.BusinessUnit;
       var allBusinessUnit = dialog.AddBoolean(Resources.AllBusinessUnits, true);
+      var selectedBusinessUnit = dialog.AddSelect("Выбрите организацию", false, Sungero.Company.BusinessUnits.Null)
+        .From(Sungero.Company.BusinessUnits.GetAll());
+      
+      dialog.SetOnRefresh(
+        args =>
+        {
+          selectedBusinessUnit.IsVisible = !allBusinessUnit.Value.Value;
+          selectedBusinessUnit.IsRequired = !allBusinessUnit.Value.Value;
+        });
+      
       var startDate = dialog.AddDate(Resources.StartDate, true, Calendar.BeginningOfYear(Calendar.Today));
       var endDate = dialog.AddDate(Resources.EndDate, true, Calendar.Today);
       
@@ -29,8 +39,12 @@ namespace GD.ReportsModule
         e.Cancel = true;
         return;
       }
+      
+      ResultRequestReport.BusinessUnitName = selectedBusinessUnit.Value != null ? selectedBusinessUnit.Value.Name : "по всем организациям";
       ResultRequestReport.StartDate = startDate.Value.Value;
       ResultRequestReport.EndDate = endDate.Value.Value;
+      if (selectedBusinessUnit.Value != null)
+        businessUnit = selectedBusinessUnit.Value;
       ResultRequestReport.BusinessUnitId = businessUnit.Id;
       ResultRequestReport.AllBusinessUnit = allBusinessUnit.Value == true;
     }
