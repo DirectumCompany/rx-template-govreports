@@ -21,7 +21,7 @@ namespace GD.ReportsModule
       var dialog = Dialogs.CreateInputDialog(Resources.ReportParameters);
       var businessUnit = current.Department.BusinessUnit;
       var allBusinessUnit = dialog.AddBoolean(Resources.AllBusinessUnits, true);
-      var selectedBusinessUnit = dialog.AddSelect("Выбрите организацию", false, Sungero.Company.BusinessUnits.Null)
+      var selectedBusinessUnit = dialog.AddSelect(Reports.Resources.ResultRequestReport.SelectBusinessUnit, false, businessUnit)
         .From(Sungero.Company.BusinessUnits.GetAll());
       
       dialog.SetOnRefresh(
@@ -40,7 +40,8 @@ namespace GD.ReportsModule
         return;
       }
       
-      ResultRequestReport.BusinessUnitName = selectedBusinessUnit.Value != null ? selectedBusinessUnit.Value.Name : "по всем организациям";
+      ResultRequestReport.BusinessUnitName = !allBusinessUnit.Value.Value ?
+        selectedBusinessUnit.Value.Name : Reports.Resources.ResultRequestReport.ForAllBusinessUnit;
       ResultRequestReport.StartDate = startDate.Value.Value;
       ResultRequestReport.EndDate = endDate.Value.Value;
       if (selectedBusinessUnit.Value != null)
