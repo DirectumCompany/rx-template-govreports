@@ -44,9 +44,7 @@ namespace GD.ReportsModule
         selectedBusinessUnit.Value.Name : Reports.Resources.ResultRequestReport.ForAllBusinessUnit;
       ResultRequestReport.StartDate = startDate.Value.Value;
       ResultRequestReport.EndDate = endDate.Value.Value;
-      if (selectedBusinessUnit.Value != null)
-        businessUnit = selectedBusinessUnit.Value;
-      ResultRequestReport.BusinessUnitId = businessUnit.Id;
+      ResultRequestReport.BusinessUnitId = selectedBusinessUnit.Value.Id;
       ResultRequestReport.AllBusinessUnit = allBusinessUnit.Value == true;
     }
 
