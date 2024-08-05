@@ -11,19 +11,15 @@ namespace GD.ReportsModule
 
     public override void BeforeExecute(Sungero.Reporting.Client.BeforeExecuteEventArgs e)
     {
-      var current = Sungero.Company.Employees.Current;
-      if (current == null || current.Department == null || current.Department.BusinessUnit == null)
-      {
-        e.Cancel = true;
-        return;
-      }
+      var isServiceUser = Users.Current.IsSystem ?? false;
+      var businessUnit = Sungero.Company.Employees.Current?.Department.BusinessUnit ?? null;
       
       var dialog = Dialogs.CreateInputDialog(Resources.ReportParameters);
-      var businessUnit = current.Department.BusinessUnit;
-      var allBusinessUnit = dialog.AddBoolean(Resources.AllBusinessUnits, true);
-      var selectedBusinessUnit = dialog.AddSelect(Reports.Resources.ResultRequestReport.SelectBusinessUnit, false, businessUnit)
+      var allBusinessUnit = dialog.AddBoolean(Resources.AllBusinessUnits, !isServiceUser);
+      allBusinessUnit.IsVisible = !isServiceUser;
+      var selectedBusinessUnit = dialog.AddSelect(Reports.Resources.ResultRequestReport.SelectBusinessUnit, isServiceUser, businessUnit)
         .From(Sungero.Company.BusinessUnits.GetAll());
-      
+
       dialog.SetOnRefresh(
         args =>
         {
