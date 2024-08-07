@@ -54,9 +54,17 @@
       "Name": "BusinessUnitId",
       "InternalDataTypeName": "System.Int64",
       "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "1d41ac40-92fc-46c6-96e5-21598f3d50d7",
+      "Name": "BusinessUnitName",
+      "InternalDataTypeName": "System.String"
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "SelectBusinessUnit",
+    "ForAllBusinessUnit"
+  ],
   "Versions": []
 }

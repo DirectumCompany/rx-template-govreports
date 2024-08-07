@@ -59,6 +59,7 @@ namespace FastReport
     <SungeroParameter Name="AllBusinessUnit" Id="e579b458-69b6-4bca-b5e8-69815986ef15" IsRequired="true" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="RequestGuid" Id="d51dee89-34ee-4bf7-aaae-6498b15073cd" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="BusinessUnitId" Id="333bb6d7-34bd-4180-9bff-cf7cac960c6d" IsRequired="false" IsCollection="false" InternalDataType="System.Int64" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitName" Id="1d41ac40-92fc-46c6-96e5-21598f3d50d7" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <Total Name="TotalReviewed" Expression="[IOGVTable.Reviewed]" Evaluator="Data1"/>
     <Total Name="TotalCitizensAmount" Expression="[IOGVTable.citizensAmount]" Evaluator="Data1"/>
     <Total Name="TotalSupportedCount" Expression="[IOGVTable.supportedCount]" Evaluator="Data1"/>
@@ -69,14 +70,14 @@ namespace FastReport
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="750" PaperHeight="210" RawPaperSize="0" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="2759.4" Height="56.7">
-      <TextObject Name="Text1" Width="2725.38" Height="56.7" Text="Итоговая таблица оценки результатов&#13;&#10;рассмотрения обращений (с учетом мнения авторов) и принятых по ним мер исполнительными органами государственной власти Тюменской области с [StartDate] по [EndDate]" HorzAlign="Center" Font="Arial, 14pt, style=Bold">
+      <TextObject Name="Text1" Width="2725.38" Height="56.7" Text="Итоговая таблица оценки результатов&#13;&#10;рассмотрения обращений (с учетом мнения авторов) и принятых по ним мер исполнительными органами государственной власти [BusinessUnitName] с [StartDate] по [EndDate]" HorzAlign="Center" Font="Arial, 14pt, style=Bold">
         <Formats>
           <DateFormat/>
           <DateFormat/>
         </Formats>
       </TextObject>
     </ReportTitleBand>
-    <DataBand Name="Data1" Top="518.3" Width="2759.4" Height="29.35" DataSource="Table">
+    <DataBand Name="Data1" Top="516.7" Width="2759.4" Height="29.35" DataSource="Table">
       <TextObject Name="Text2" Width="368.55" Height="28.35" Text="[IOGVTable.BusinessUnit]" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text3" Left="374.22" Width="52.92" Height="28.35" Text="[IOGVTable.Reviewed]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text4" Left="532.98" Width="56.7" Height="28.35" Text="[IOGVTable.citizensAmount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
@@ -93,7 +94,7 @@ namespace FastReport
       <TextObject Name="Text15" Left="1252.4" Width="66.15" Height="28.35" Text="[IOGVTable.ActionsTakenShareComparison]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text16" Left="1743.8" Width="66.15" Height="28.35" Text="[IOGVTable.NotSupportedShareComparison]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text17" Left="2137.7" Width="66.15" Height="28.35" Text="[IOGVTable.ExplainedShareComparison]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" VertAlign="Center" Font="Arial, 10pt"/>
-      <DataHeaderBand Name="DataHeader1" Top="60.7" Width="2759.4" Height="453.6">
+      <DataHeaderBand Name="DataHeader1" Top="59.9" Width="2759.4" Height="453.6">
         <TableObject Name="TitleTable" Width="2735.17" Height="453.6" Border.Lines="Top">
           <TableColumn Name="Column1" Width="374.22"/>
           <TableColumn Name="Column2" Width="52.92"/>
@@ -330,7 +331,7 @@ namespace FastReport
         </TableObject>
       </DataHeaderBand>
     </DataBand>
-    <DataBand Name="Data2" Top="551.65" Width="2759.4" Height="28.35">
+    <DataBand Name="Data2" Top="549.25" Width="2759.4" Height="28.35">
       <TableObject Name="TotalTable" Width="2735.17" Height="28.35" Fill.Color="255, 192, 192">
         <TableColumn Name="Column38" Width="374.22"/>
         <TableColumn Name="Column39" Width="52.92"/>
