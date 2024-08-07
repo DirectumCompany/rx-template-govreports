@@ -11,13 +11,11 @@ namespace GD.ReportsModule
 
     public override void BeforeExecute(Sungero.Reporting.Client.BeforeExecuteEventArgs e)
     {
-      var isServiceUser = Users.Current.IsSystem ?? false;
-      var businessUnit = Sungero.Company.Employees.Current?.Department.BusinessUnit ?? null;
+      var businessUnit = Sungero.Company.Employees.Current?.Department.BusinessUnit;
       
       var dialog = Dialogs.CreateInputDialog(Resources.ReportParameters);
-      var allBusinessUnit = dialog.AddBoolean(Resources.AllBusinessUnits, !isServiceUser);
-      allBusinessUnit.IsVisible = !isServiceUser;
-      var selectedBusinessUnit = dialog.AddSelect(Reports.Resources.ResultRequestReport.SelectBusinessUnit, isServiceUser, businessUnit)
+      var allBusinessUnit = dialog.AddBoolean(Resources.AllBusinessUnits, true);
+      var selectedBusinessUnit = dialog.AddSelect(Reports.Resources.ResultRequestReport.SelectBusinessUnit, false, businessUnit)
         .From(Sungero.Company.BusinessUnits.GetAll());
 
       dialog.SetOnRefresh(
@@ -40,8 +38,8 @@ namespace GD.ReportsModule
         selectedBusinessUnit.Value.Name : Reports.Resources.ResultRequestReport.ForAllBusinessUnit;
       ResultRequestReport.StartDate = startDate.Value.Value;
       ResultRequestReport.EndDate = endDate.Value.Value;
-      ResultRequestReport.BusinessUnitId = selectedBusinessUnit.Value.Id;
-      ResultRequestReport.AllBusinessUnit = allBusinessUnit.Value == true;
+      ResultRequestReport.BusinessUnitId = selectedBusinessUnit.Value?.Id;
+      ResultRequestReport.AllBusinessUnit =  allBusinessUnit.Value == true;
     }
 
   }
