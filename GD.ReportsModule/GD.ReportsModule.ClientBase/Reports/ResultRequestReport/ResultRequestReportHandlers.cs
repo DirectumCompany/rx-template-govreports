@@ -38,7 +38,7 @@ namespace GD.ReportsModule
         selectedBusinessUnit.Value.Name : Reports.Resources.ResultRequestReport.ForAllBusinessUnit;
       ResultRequestReport.StartDate = startDate.Value.Value;
       ResultRequestReport.EndDate = endDate.Value.Value;
-      ResultRequestReport.BusinessUnitId = selectedBusinessUnit.Value?.Id;
+      ResultRequestReport.BusinessUnitId = selectedBusinessUnit.Value == null ? -1 : selectedBusinessUnit.Value.Id;
       ResultRequestReport.AllBusinessUnit =  allBusinessUnit.Value == true;
     }
 
