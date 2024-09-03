@@ -82,6 +82,7 @@
   "InterfaceNamespace": "GD.ReportsModule",
   "IsolatedAssemblyName": "GD.ReportsModule.Isolated",
   "IsolatedNamespace": "GD.ReportsModule.Isolated",
+  "IsVisible": false,
   "Overridden": [
     "IsVisible"
   ],

@@ -1,0 +1,26 @@
+{
+  "AllReports_Description_092f39c0d466481b84289a7283f967b9": {
+    "en-US": "List module reports.",
+    "ru-RU": "Список отчетов модуля."
+  },
+  "AllReports_Title_092f39c0d466481b84289a7283f967b9": {
+    "en-US": "Others reports",
+    "ru-RU": "Прочие отчеты"
+  },
+  "CoverHeaderSettings_Title_45c929fcfc6a4c72a9679233866875fc": {
+    "en-US": "Reports",
+    "ru-RU": "Отчеты"
+  },
+  "Description": {},
+  "Name": {
+    "en-US": "Reports",
+    "ru-RU": "Отчеты"
+  },
+  "ReportsGroup_Title_975800026f9948b2a71c8d05c0c44a0a": {
+    "en-US": "Others reports",
+    "ru-RU": "Прочие отчеты"
+  },
+  "Tab_Title_653ee7e43dca4d609e81946e426fedde": {
+    "en-US": "Tab"
+  }
+}
