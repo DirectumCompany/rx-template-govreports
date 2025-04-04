@@ -66,5 +66,10 @@
     "SelectBusinessUnit",
     "ForAllBusinessUnit"
   ],
-  "Versions": []
+  "Versions": [
+    {
+      "Type": "ReportMetadata",
+      "Number": 1
+    }
+  ]
 }

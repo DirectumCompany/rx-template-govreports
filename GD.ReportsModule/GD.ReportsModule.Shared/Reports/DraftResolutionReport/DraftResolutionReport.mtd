@@ -134,5 +134,10 @@
     "DocumentInfoDateFrom",
     "UnifyingExecutorPrefix"
   ],
-  "Versions": []
+  "Versions": [
+    {
+      "Type": "ReportMetadata",
+      "Number": 1
+    }
+  ]
 }
