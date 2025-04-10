@@ -104,5 +104,10 @@
     "NotAllOrdersHaveBeenCompleted",
     "NotAllQuestionsAreAnswered"
   ],
-  "Versions": []
+  "Versions": [
+    {
+      "Type": "ReportMetadata",
+      "Number": 1
+    }
+  ]
 }
