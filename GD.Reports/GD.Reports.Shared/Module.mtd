@@ -26,7 +26,6 @@
     "Tabs": []
   },
   "DesktopViews": [],
-  "IconResourcesKeys": [],
   "Importance": "Medium",
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "InterfaceNamespace": "GD.Reports",
@@ -36,7 +35,6 @@
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "GD.Reports",
-  "ResourcesKeys": [],
   "ServerAssemblyName": "GD.Reports.Server",
   "ServerNamespace": "GD.Reports.Server",
   "SharedAssemblyName": "GD.Reports.Shared",
@@ -47,11 +45,11 @@
   "Versions": [
     {
       "Type": "SolutionMetadata",
-      "Number": 9
+      "Number": 12
     },
     {
       "Type": "ModuleMetadata",
-      "Number": 9
+      "Number": 12
     },
     {
       "Type": "DomainApi",

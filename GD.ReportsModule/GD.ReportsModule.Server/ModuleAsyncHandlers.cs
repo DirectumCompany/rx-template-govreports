@@ -6,7 +6,7 @@ using Sungero.CoreEntities;
 
 namespace GD.ReportsModule.Server
 {
-  public class ModuleAsyncHandlers
+  public partial class ModuleAsyncHandlers
   {
 
   }
