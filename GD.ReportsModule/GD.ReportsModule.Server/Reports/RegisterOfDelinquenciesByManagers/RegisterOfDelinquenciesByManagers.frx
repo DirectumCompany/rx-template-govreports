@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Localization&#13;&#10;Sungero.Declension&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;FastReport.Compat.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;FastReport.DataVisualization.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Localization&#13;&#10;Sungero.Declension&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;GD.ReportsModule.Shared&#13;&#10;GD.ReportsModule.Server" ReportInfo.CreatorVersion="2024.2.19.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +29,7 @@ namespace FastReport
 }
   </ScriptText>
   <Dictionary>
-    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]" CommandTimeout="120">
       <TableDataSource Name="Table2" Alias="M" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Managers}">
         <Column Name="RequestId" DataType="System.Int64" PropName="Column"/>
         <Column Name="ManagerName" DataType="System.String" PropName="Column"/>
@@ -69,19 +69,19 @@ namespace FastReport
         <CommandParameter Name="DocumentReviewTaskDocumentForReviewGroupGuid" DataType="16" IsDbType="true" Expression="[DocumentReviewTaskDocumentForReviewGroupGuid]"/>
       </TableDataSource>
     </SungeroSqlDataConnection>
-    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="94cd55c9-24e9-4623-865f-a111309d1676" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="StartDate" Id="d0074c6a-4ccb-492a-842a-2c90e73e6c8e" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="EndDate" Id="63892cdf-6eba-4f9a-b0b0-4a194cd8547f" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="BusinessUnitId" Id="a21d2648-80e2-4168-99bd-0a42bc8a50f5" IsRequired="true" IsCollection="false" InternalDataType="System.Int64" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="BusinessUnit" Id="a3b4d276-592f-4ffd-8599-53546c1c422d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="RequestGuid" Id="9ba2a55d-e049-4351-aa2f-dc762e075183" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="ActionItemExecutionTaskGuid" Id="726c9b51-12d9-4721-a339-ffcaebd8024d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="ActionItemExecutionAssignmentGuid" Id="6c607566-22ba-4553-b13c-aaec919b7074" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="DocumentReviewTaskGuid" Id="dfc0e5c0-d81b-42b3-8153-02d1d815d390" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="ActionItemExecutionTaskDocumentsGroupGuid" Id="6074ffd0-731a-4037-9439-1deac7eb3c0f" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="DocumentReviewTaskDocumentForReviewGroupGuid" Id="c28c9ced-9a8f-4289-a259-6ac5ebb08fb7" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="NotAllQuestionsAreAnswered" Id="7aed6781-374f-479f-bcc0-35c5c8f1d6f8" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
-    <SungeroParameter Name="NotAllOrdersHaveBeenCompleted" Id="db4a4b02-964f-42b5-9393-564d90990cd2" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" AsString="" Id="94cd55c9-24e9-4623-865f-a111309d1676" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="StartDate" AsString="" Id="d0074c6a-4ccb-492a-842a-2c90e73e6c8e" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" AsString="" Id="63892cdf-6eba-4f9a-b0b0-4a194cd8547f" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnitId" AsString="" Id="a21d2648-80e2-4168-99bd-0a42bc8a50f5" IsRequired="true" IsCollection="false" InternalDataType="System.Int64" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnit" AsString="" Id="a3b4d276-592f-4ffd-8599-53546c1c422d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RequestGuid" AsString="" Id="9ba2a55d-e049-4351-aa2f-dc762e075183" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ActionItemExecutionTaskGuid" AsString="" Id="726c9b51-12d9-4721-a339-ffcaebd8024d" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ActionItemExecutionAssignmentGuid" AsString="" Id="6c607566-22ba-4553-b13c-aaec919b7074" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentReviewTaskGuid" AsString="" Id="dfc0e5c0-d81b-42b3-8153-02d1d815d390" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ActionItemExecutionTaskDocumentsGroupGuid" AsString="" Id="6074ffd0-731a-4037-9439-1deac7eb3c0f" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentReviewTaskDocumentForReviewGroupGuid" AsString="" Id="c28c9ced-9a8f-4289-a259-6ac5ebb08fb7" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="NotAllQuestionsAreAnswered" AsString="" Id="7aed6781-374f-479f-bcc0-35c5c8f1d6f8" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="NotAllOrdersHaveBeenCompleted" AsString="" Id="db4a4b02-964f-42b5-9393-564d90990cd2" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <Total Name="ManagerTotal" TotalType="Count" Evaluator="Data3" PrintOn="GroupFooter1"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="450" PaperHeight="210" RawPaperSize="0" Watermark.Font="Arial, 60pt">
@@ -128,20 +128,19 @@ namespace FastReport
       </TextObject>
     </ReportTitleBand>
     <GroupHeaderBand Name="GroupHeader2" Top="155.2" Width="1625.4" Condition="[M.ManagerName]">
-      <DataBand Name="Data3" Top="159.2" Width="1625.4" Height="9.45" DataSource="Table2">
-        <TextObject Name="Text14" Left="9.45" Width="94.5" Height="9.45" Font="Arial, 10pt"/>
-        <DataBand Name="Data4" Top="172.65" Width="1625.4" Height="47.25" CanGrow="true" DataSource="Table4" Filter="[M.RequestId] == [P.RequestId] &amp;&amp; [M.ManagerName] == [P.ManagerName]">
-          <TextObject Name="Text15" Left="9.45" Width="302.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.ManagerName]" Duplicates="Merge" HorzAlign="Center" Font="Arial, 10pt"/>
-          <TextObject Name="Text16" Left="311.85" Width="179.55" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.RegNumber]&#13;&#10;[M.RegDate]" Duplicates="Merge" HorzAlign="Center" Font="Arial, 10pt">
+      <DataBand Name="Data3" Top="159.2" Width="1625.4" DataSource="Table2">
+        <DataBand Name="Data4" Top="163.2" Width="1625.4" Height="47.25" CanGrow="true" DataSource="Table4" Filter="[M.RequestId] == [P.RequestId] &amp;&amp; [M.ManagerName] == [P.ManagerName]">
+          <TextObject Name="Text15" Left="9.45" Width="302.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.ManagerName]" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text16" Left="311.85" Width="179.55" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.RegNumber]&#13;&#10;[M.RegDate]" HorzAlign="Center" Font="Arial, 10pt">
             <Formats>
               <GeneralFormat/>
               <DateFormat/>
               <GeneralFormat/>
             </Formats>
           </TextObject>
-          <TextObject Name="Text17" Left="491.4" Width="274.05" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.CorName]" Duplicates="Merge" HorzAlign="Center" Font="Arial, 10pt"/>
-          <TextObject Name="Text18" Left="765.45" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.RequestDeadline]" Duplicates="Merge" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
-          <TextObject Name="Text19" Left="878.85" Width="122.85" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[IIf([M.HasRCompleteDate]==1, [M.RCompleteDate], [NotAllQuestionsAreAnswered])]" Duplicates="Merge" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text17" Left="491.4" Width="274.05" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.CorName]" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text18" Left="765.45" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[M.RequestDeadline]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TextObject Name="Text19" Left="878.85" Width="122.85" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[IIf([M.HasRCompleteDate]==1, [M.RCompleteDate], [NotAllQuestionsAreAnswered])]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
           <TextObject Name="Text20" Left="1001.7" Width="274.05" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[P.BUName]" HorzAlign="Center" Font="Arial, 10pt"/>
           <TextObject Name="Text21" Left="1275.75" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[P.AssignmentDeadline]" HideZeros="true" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
           <TextObject Name="Text22" Left="1389.15" Width="113.4" Height="47.25" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[IIf([P.HasACompleteDate]==1, [P.ACompleteDate], [NotAllOrdersHaveBeenCompleted])]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
@@ -156,7 +155,7 @@ namespace FastReport
           <Sort Expression="[M.ManagerName]"/>
         </Sort>
       </DataBand>
-      <GroupFooterBand Name="GroupFooter1" Top="223.9" Width="1625.4" Height="28.35" CanShrink="true">
+      <GroupFooterBand Name="GroupFooter1" Top="214.45" Width="1625.4" Height="28.35" CanShrink="true">
         <TextObject Name="Text3" Left="9.45" Width="302.4" Height="28.35" CanShrink="true" CanBreak="false" Text="[IIf([ManagerTotal] == 0, null, &quot;ИТОГО: &quot; + [ManagerTotal])]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="," Format.GroupSeparator=" " Format.NegativePattern="1" Font="Arial, 10pt, style=Bold"/>
       </GroupFooterBand>
     </GroupHeaderBand>
