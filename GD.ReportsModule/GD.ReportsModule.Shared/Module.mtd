@@ -101,11 +101,10 @@
         {
           "Name": "actionItems",
           "ParameterType": "global::System.Collections.Generic.List<global::Sungero.RecordManagement.IActionItemExecutionTask>",
-          "ParameterTypeFullName": "System.Collections.Generic.List"
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces]]"
         }
       ],
-      "ReturnType": "global::System.Collections.Generic.List<Structures.DraftResolutionReport.DraftResolutionReportParameters>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
+      "ReturnType": "global::System.Collections.Generic.List<Structures.DraftResolutionReport.DraftResolutionReportParameters>"
     },
     {
       "Name": "GetDraftResolutionReportDocumentInfo",
@@ -137,16 +136,16 @@
         {
           "Name": "dividend",
           "ParameterType": "global::System.Nullable<global::System.Double>",
-          "ParameterTypeFullName": "System.Nullable"
+          "ParameterTypeFullName": "System.Nullable`1[[System.Double]]"
         },
         {
           "Name": "divider",
           "ParameterType": "global::System.Nullable<global::System.Double>",
-          "ParameterTypeFullName": "System.Nullable"
+          "ParameterTypeFullName": "System.Nullable`1[[System.Double]]"
         }
       ],
       "ReturnType": "global::System.Nullable<global::System.Double>",
-      "ReturnTypeFullName": "System.Nullable"
+      "ReturnTypeFullName": "System.Nullable`1[[System.Double]]"
     },
     {
       "Name": "OpenDraftResolution",
@@ -154,7 +153,7 @@
         {
           "Name": "tasks",
           "ParameterType": "global::System.Collections.Generic.List<global::Sungero.RecordManagement.IActionItemExecutionTask>",
-          "ParameterTypeFullName": "System.Collections.Generic.List"
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces]]"
         },
         {
           "Name": "textResolution",
