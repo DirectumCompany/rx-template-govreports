@@ -27,22 +27,19 @@
       "NameGuid": "20923eec-c70c-487a-9204-8849f6728492",
       "Name": "StartDate",
       "InternalDataTypeName": "System.DateTime",
-      "IsRequired": true,
-      "IsSimpleDataType": true
+      "IsRequired": true
     },
     {
       "NameGuid": "966e7c6b-c3cf-4049-a074-59f321b4b86e",
       "Name": "EndDate",
       "InternalDataTypeName": "System.DateTime",
-      "IsRequired": true,
-      "IsSimpleDataType": true
+      "IsRequired": true
     },
     {
       "NameGuid": "e579b458-69b6-4bca-b5e8-69815986ef15",
       "Name": "AllBusinessUnit",
       "InternalDataTypeName": "System.Boolean",
-      "IsRequired": true,
-      "IsSimpleDataType": true
+      "IsRequired": true
     },
     {
       "NameGuid": "d51dee89-34ee-4bf7-aaae-6498b15073cd",
@@ -52,8 +49,7 @@
     {
       "NameGuid": "333bb6d7-34bd-4180-9bff-cf7cac960c6d",
       "Name": "BusinessUnitId",
-      "InternalDataTypeName": "System.Int64",
-      "IsSimpleDataType": true
+      "InternalDataTypeName": "System.Int64"
     },
     {
       "NameGuid": "1d41ac40-92fc-46c6-96e5-21598f3d50d7",

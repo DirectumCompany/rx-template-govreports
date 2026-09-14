@@ -29,22 +29,19 @@
       "NameGuid": "d0074c6a-4ccb-492a-842a-2c90e73e6c8e",
       "Name": "StartDate",
       "InternalDataTypeName": "System.DateTime",
-      "IsRequired": true,
-      "IsSimpleDataType": true
+      "IsRequired": true
     },
     {
       "NameGuid": "63892cdf-6eba-4f9a-b0b0-4a194cd8547f",
       "Name": "EndDate",
       "InternalDataTypeName": "System.DateTime",
-      "IsRequired": true,
-      "IsSimpleDataType": true
+      "IsRequired": true
     },
     {
       "NameGuid": "a21d2648-80e2-4168-99bd-0a42bc8a50f5",
       "Name": "BusinessUnitId",
       "InternalDataTypeName": "System.Int64",
-      "IsRequired": true,
-      "IsSimpleDataType": true
+      "IsRequired": true
     },
     {
       "NameGuid": "a3b4d276-592f-4ffd-8599-53546c1c422d",
